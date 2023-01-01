@@ -32,7 +32,7 @@ p {
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: #1976d2;
+  background-color: #CD2434;
   color: white;
   font-weight: 600;
 }
@@ -41,18 +41,12 @@ p {
   margin: 0 16px;
 }
 
-.toolbar #twitter-logo {
-  height: 40px;
-  margin: 0 8px;
-}
-
-.toolbar #youtube-logo {
-  height: 40px;
+.toolbar #github-logo {
+  height: 35px;
   margin: 0 16px;
 }
 
-.toolbar #twitter-logo:hover,
-.toolbar #youtube-logo:hover {
+.toolbar #github-logo:hover {
   opacity: 0.8;
 }
 

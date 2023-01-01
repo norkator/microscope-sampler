@@ -14,3 +14,4 @@ uvicorn==0.20.0
 httptools==0.5.0
 watchfiles==0.18.1
 setuptools==65.6.3
+sqlalchemy==1.4.45

@@ -1,19 +1,48 @@
 # Microscope sampler
 
+Microscope sampler is a web app build for use to manage microscope sample images. Intended
+case of use consists defining sample categories, taking sample images, saving them with
+basic information and taking more same sample images to compare with earlier records.
+This app is intended to help with your own research and work as a simple data store.
 
+This application is intended to be run as docker container. All data is saved locally
+on sqlite database and local resource folder which contains saved images.
 
+## Getting started as user
 
+Todo...
 
-## Getting started
+## Getting started as developer
 
 Backend is based on `fastapi` https://fastapi.tiangolo.com/
 
-### Install
-```
-todo..
+Frontend is based on Angular.
+
+### Backend
+
+on `backend` define python interpreter and create venv environment.
+Then install required packages from `requirements.txt`
+
+```shell
+pip install -r requirements.txt
 ```
 
-### Run
+Make sure python venv is active and then run backend app:
+
 ```shell
 uvicorn main:app --reload
+```
+
+### Frontend
+
+Install dependencies
+
+```shell
+npm install
+```
+
+Run frontend
+
+```shell
+npm run start
 ```

@@ -2,8 +2,9 @@ from typing import Union
 
 from fastapi import FastAPI
 
-from . import models, schemas
-from .database import SessionLocal, engine
+import models
+import schemas
+from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 

@@ -22,9 +22,9 @@ def get_db():
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return {}
 
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/categories")
+async def get_categories():
+    return {"categories": [{"id": 1, "name": "Blood samples"}, {"id": 2, "name": "Something else"}]}

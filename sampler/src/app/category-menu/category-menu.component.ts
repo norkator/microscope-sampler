@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryInterfaces} from "../interfaces";
 import {CategoryService} from "./category.service";
 import {NavigationExtras, Router} from "@angular/router";
+import {Validators, FormGroup, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-category-menu',
@@ -14,13 +15,21 @@ export class CategoryMenuComponent implements OnInit {
   public selectedCategoryId: number = 0;
   public categoryAddModalOpen: boolean = false;
 
+  // Forms
+  public categoryFormGroup!: FormGroup;
+
   constructor(
     private categoryService: CategoryService,
+    private formBuilder: FormBuilder,
     private router: Router,
   ) {
   }
 
   ngOnInit(): void {
+    this.categoryFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+    });
+
     this.getCategories();
   }
 

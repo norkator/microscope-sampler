@@ -230,5 +230,6 @@ svg#clouds {
 
 
 .flex-container {
-  display: flex; /* or inline-flex */
+  display: flex;
+  flex-wrap: wrap;
 }

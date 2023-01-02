@@ -4,7 +4,11 @@
   <app-board-button
     *ngFor="let category of categories"
     [isAddBtn]="false" [title]="category.name"
+    (click)="openCategory(category.id)"
   ></app-board-button>
-  <app-board-button [isAddBtn]="true" title="Add new"></app-board-button>
+  <app-board-button
+    [isAddBtn]="true" title="Add new"
+    (click)="addCategory()"
+  ></app-board-button>
 </div>
 

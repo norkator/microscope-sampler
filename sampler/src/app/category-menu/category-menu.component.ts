@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryInterfaces} from "../interfaces";
 import {CategoryService} from "./category.service";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
   selector: 'app-category-menu',
@@ -13,6 +14,7 @@ export class CategoryMenuComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
+    private router: Router,
   ) {
   }
 
@@ -27,6 +29,19 @@ export class CategoryMenuComponent implements OnInit {
       },
       error: (error: any) => console.error(error)
     });
+  }
+
+  public openCategory(id: number): void {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        category_id: id,
+      }
+    };
+    this.router.navigate(['sample-group'], navigationExtras).then(() => null);
+  }
+
+  public addCategory(): void {
+
   }
 
 }

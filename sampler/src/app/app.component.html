@@ -21,36 +21,9 @@
 
 <div class="content" role="main">
 
-  <div class="content-grid">
-    <div>
-      jelkoaskpd
-    </div>
-    <div class="content-grid-menu">
+  <app-front-menu></app-front-menu>
 
-      <h2>Tools</h2>
-      <p>Choose what to do?</p>
-
-      <input type="hidden" #selection>
-
-      <div class="card-container">
-        <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-          <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          </svg>
-          <span>New category</span>
-        </button>
-
-        <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-          <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          </svg>
-          <span>New sample group</span>
-        </button>
-
-      </div>
-
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 
   <!-- Footer -->
   <footer>

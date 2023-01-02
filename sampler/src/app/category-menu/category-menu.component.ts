@@ -12,6 +12,7 @@ export class CategoryMenuComponent implements OnInit {
 
   public categories: CategoryInterfaces[] = [];
   public selectedCategoryId: number = 0;
+  public categoryAddModalOpen: boolean = false;
 
   constructor(
     private categoryService: CategoryService,

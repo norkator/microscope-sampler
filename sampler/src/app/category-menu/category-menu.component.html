@@ -16,6 +16,7 @@
 
 
 <app-modal
+  (modalClosedClick)="categoryAddModalOpen = !categoryAddModalOpen"
   [isOpen]="categoryAddModalOpen"
   title="Add category"
 ></app-modal>

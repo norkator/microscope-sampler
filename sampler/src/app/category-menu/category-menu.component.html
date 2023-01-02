@@ -19,5 +19,17 @@
   (modalClosedClick)="categoryAddModalOpen = !categoryAddModalOpen"
   [isOpen]="categoryAddModalOpen"
   title="Add category"
-></app-modal>
+>
+  <div>
+    <p>Categories are used to filter groups of samples called "sample groups"</p>
+    <div class="input-form-container">
+      <form>
+        <label for="gName">New category name</label>
+        <input type="text" id="gName" name="category_name" placeholder="New category name">
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+  </div>
+</app-modal>
 

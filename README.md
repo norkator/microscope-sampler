@@ -1,12 +1,21 @@
 # Microscope sampler
 
-Microscope sampler is a web app build for use to manage microscope sample images. Intended
-case of use consists defining sample categories, taking sample images, saving them with
-basic information and taking more same sample images to compare with earlier records.
-This app is intended to help with your own research and work as a simple data store.
+[WORK IN PROGRESS]
 
-This application is intended to be run as docker container. All data is saved locally
-on sqlite database and local resource folder which contains saved images.
+Microscope sampler is a web app build for use to manage microscope sample images. Intended
+case of use consists defining sample categories, taking samples containing images,
+saving them with basic information which then as a group creates sample group.
+Sample groups are added under categories which gives this app it's purpose as a sample
+image manager app. This app is intended to help with your own research and work as a
+simple data store.
+
+### Planned development
+
+* Directly connect to microscope camera interface connected to computer.
+* Sample images could be compared with earlier records.
+* Intended to be run as docker container. All data is saved locally
+  on sqlite database and local resource folder which contains saved images.
+* Maybe as an online hosted service with accounts.
 
 ## Getting started as user
 

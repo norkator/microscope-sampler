@@ -37,4 +37,4 @@ async def read_root():
 
 @app.get("/categories")
 async def get_categories():
-    return {"categories": [{"id": 1, "name": "Blood samples"}, {"id": 2, "name": "Something else"}]}
+    return [{"id": 1, "name": "Blood samples"}, {"id": 2, "name": "Something else"}]

@@ -28,6 +28,10 @@
   border-style: dashed;
 }
 
+.card-selected {
+  font-weight: bold;
+}
+
 .card-container .card:not(:last-child) {
   margin-right: 0;
 }

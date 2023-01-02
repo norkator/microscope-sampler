@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BoardButtonComponent implements OnInit {
   @Input() public isAddBtn: boolean = false;
+  @Input() public isSelected: boolean = false;
   @Input() public title: string = '';
 
   constructor() {

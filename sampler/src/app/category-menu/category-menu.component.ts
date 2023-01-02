@@ -11,6 +11,7 @@ import {NavigationExtras, Router} from "@angular/router";
 export class CategoryMenuComponent implements OnInit {
 
   public categories: CategoryInterfaces[] = [];
+  public selectedCategoryId: number = 0;
 
   constructor(
     private categoryService: CategoryService,
@@ -32,6 +33,7 @@ export class CategoryMenuComponent implements OnInit {
   }
 
   public openCategory(id: number): void {
+    this.selectedCategoryId = id;
     const navigationExtras: NavigationExtras = {
       queryParams: {
         category_id: id,

@@ -1,0 +1,9 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" [ngClass]="[isOpen ? 'modal-open' : '']">
+  <div class="modal-content">
+    <span (click)="isOpen = !isOpen" class="modal-close">&times;</span>
+    <h2>{{title}}</h2>
+    <!-- places element placed inside this component here -->
+    <ng-content></ng-content>
+  </div>
+</div>

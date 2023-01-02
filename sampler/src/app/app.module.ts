@@ -8,6 +8,7 @@ import {BoardButtonComponent} from './ui-components/board-button/board-button.co
 import {CategoryMenuComponent} from "./category-menu/category-menu.component";
 import {SampleGroupsComponent} from './sample-groups/sample-groups.component';
 import {SampleComponent} from './sample/sample.component';
+import {ModalComponent} from './ui-components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {SampleComponent} from './sample/sample.component';
     CategoryMenuComponent,
     SampleGroupsComponent,
     SampleComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

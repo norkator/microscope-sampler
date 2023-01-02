@@ -15,11 +15,8 @@
 </div>
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal" [ngClass]="[categoryAddModalOpen ? 'modal-open' : '']">
-  <div class="modal-content">
-    <span (click)="categoryAddModalOpen = !categoryAddModalOpen" class="modal-close">&times;</span>
-    <h2>Add category</h2>
-  </div>
-</div>
+<app-modal
+  [isOpen]="categoryAddModalOpen"
+  title="Add category"
+></app-modal>
 

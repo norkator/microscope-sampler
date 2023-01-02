@@ -6,6 +6,8 @@ body {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
@@ -52,7 +54,11 @@ p {
 }
 
 .content {
-  margin: 82px auto 32px;
+  margin: 72px auto 32px;
+}
+
+.content-wrapper {
+  margin: 10px;
 }
 
 .content-grid {
@@ -144,6 +150,10 @@ a:hover {
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
   margin-top: 8px;
   display: flex;
   align-items: center;

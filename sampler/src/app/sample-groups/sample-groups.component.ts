@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryInterface, SampleGroupInterface} from "../interfaces";
 import {ActivatedRoute, NavigationExtras, Params, Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleGroupService} from "./sample-group.service";
 
 @Component({
@@ -31,6 +31,21 @@ export class SampleGroupsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sampleGroupFormGroup = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      category_id: [0, [Validators.required]],
+    });
+
+    this.getSampleGroups();
+  }
+
+  private getSampleGroups(): void {
+    this.sampleGroupService.getSampleGroups().subscribe({
+      next: (data: SampleGroupInterface[]) => {
+        this.sampleGroups = data;
+      },
+      error: (error: any) => console.error(error)
+    });
   }
 
   private getCategory(categoryId: number): void {
@@ -48,6 +63,22 @@ export class SampleGroupsComponent implements OnInit {
       }
     };
     this.router.navigate(['sample'], navigationExtras).then(() => null);
+  }
+
+  public createSampleGroup(): void {
+    if (this.sampleGroupFormGroup.valid) {
+      this.sampleGroupService.createSampleGroup(
+        this.sampleGroupFormGroup.controls['name'].value,
+        this.sampleGroupFormGroup.controls['category_id'].value,
+      ).subscribe({
+        next: (data: SampleGroupInterface) => {
+          this.sampleGroups.push(data);
+          // this.categoryFormGroup.controls['name'].setValue('');
+          this.sampleGroupAddModalOpen = !this.sampleGroupAddModalOpen;
+        },
+        error: (error: any) => console.error(error)
+      })
+    }
   }
 
 }

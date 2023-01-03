@@ -1,4 +1,4 @@
-<h1 routerLink="/"> <a>{{category?.name}}</a> /</h1><h2>Choose sample group</h2>
+<h1 routerLink="/"><a>{{category?.name}}</a> /</h1><h2>Choose sample group</h2>
 
 <div class="flex-container">
   <app-board-button
@@ -13,3 +13,24 @@
     (click)="sampleGroupAddModalOpen = !sampleGroupAddModalOpen"
   ></app-board-button>
 </div>
+
+<app-modal
+  (modalClosedClick)="sampleGroupAddModalOpen = !sampleGroupAddModalOpen"
+  [isOpen]="sampleGroupAddModalOpen"
+  title="Add sample group"
+>
+  <div>
+    <p>Sample groups will hold individual samples together combining a group</p>
+    <div class="input-form-container">
+      <form [formGroup]="sampleGroupFormGroup" (ngSubmit)="createSampleGroup()">
+        <label for="sampleGroupName">New sample group name</label>
+        <input formControlName="name" type="text" id="sampleGroupName" name="sample_group_name"
+               placeholder="New sample group name">
+
+        <p>Will be created under category: {{category?.name}}</p>
+        <br>
+        <input type="submit" value="Create" [disabled]="!sampleGroupFormGroup.valid">
+      </form>
+    </div>
+  </div>
+</app-modal>

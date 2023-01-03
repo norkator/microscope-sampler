@@ -4,12 +4,19 @@ from sqlalchemy.orm import relationship
 from database import Base
 
 
+class Category(Base):
+    __tablename__ = "sample_category"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+
+
 class SampleGroup(Base):
     __tablename__ = "sample_group"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
-    category = Column(String)
+    category_id = Column(Integer, ForeignKey("sample_category.id"))
 
     samples = relationship("Sample", back_populates="sample_group")
 

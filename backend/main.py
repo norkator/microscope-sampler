@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
 
 import models
 import schemas
+import crud
 from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -36,11 +38,19 @@ async def read_root():
     return {}
 
 
-@app.get("/categories")
-async def get_categories():
-    return [{"id": 1, "name": "Blood samples"}, {"id": 2, "name": "Something else"}]
+@app.get("/categories", response_model=list[schemas.Category])
+async def get_categories(db: Session = Depends(get_db)):
+    return crud.get_categories(db)
 
 
-@app.post("/category")
-async def create_item(item: schemas.Category):
-    return item
+@app.get("/category/{category_id}", response_model=list[schemas.Category])
+async def get_categories(category_id: int, db: Session = Depends(get_db)):
+    return crud.get_category(db, category_id=category_id)
+
+
+@app.post("/category", response_model=schemas.Category)
+async def create_category(category: schemas.CategoryCreate, db: Session = Depends(get_db)):
+    db_category = crud.get_category_by_name(db, name=category.name)
+    if db_category:
+        raise HTTPException(status_code=400, detail="Category name already exists")
+    return crud.create_category(db=db, category=category)

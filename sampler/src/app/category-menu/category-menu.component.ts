@@ -53,7 +53,16 @@ export class CategoryMenuComponent implements OnInit {
   }
 
   public createCategory(): void {
-    console.log(this.categoryFormGroup.valid);
+    if (this.categoryFormGroup.valid) {
+      this.categoryService.createCategory(this.categoryFormGroup.controls['name'].value).subscribe({
+        next: (data: CategoryInterface) => {
+          this.categories.push(data);
+          this.categoryFormGroup.controls['name'].setValue('');
+          this.categoryAddModalOpen = !this.categoryAddModalOpen;
+        },
+        error: (error: any) => console.error(error)
+      })
+    }
   }
 
 }

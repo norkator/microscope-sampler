@@ -52,8 +52,8 @@ export class CategoryMenuComponent implements OnInit {
     this.router.navigate(['sample-group'], navigationExtras).then(() => null);
   }
 
-  public addCategory(): void {
-
+  public createCategory(): void {
+    console.log(this.categoryFormGroup.valid);
   }
 
 }

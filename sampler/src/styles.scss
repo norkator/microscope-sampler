@@ -259,6 +259,10 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type=submit]:disabled {
+  background-color: #9f9f9f;
+}
+
+input[type=submit]:hover:not(:disabled) {
   background-color: #45a049;
 }

@@ -18,4 +18,10 @@ export class CategoryService {
     return this.http.get(environment.api + '/categories', ConstantsModule.httpOptions);
   }
 
+  createCategory(name: string): Observable<any> {
+    return this.http.post(environment.api + '/category', {
+      name: name,
+    }, ConstantsModule.httpOptions);
+  }
+
 }

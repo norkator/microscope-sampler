@@ -10,10 +10,13 @@ image manager app. This app is intended to help with your own research and work 
 simple data store.
 
 ### Planned development
+
 Using https://github.com/norkator/microscope-sampler/issues to list ideas.
 
 ### Attributions
-* Need to create attribution page for logo [Germ icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/germ)
+
+* Need to create attribution page for
+  logo [Germ icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/germ)
 
 ## Getting started as user
 

@@ -40,19 +40,19 @@ class Sample(SampleBase):
 
 class SampleGroupBase(BaseModel):
     name: str
-    category: str
+    category_id: int
 
 
 class SampleGroupCreate(SampleGroupBase):
     name: str
-    category: str
+    category_id: int
 
 
 class SampleGroup(SampleGroupBase):
     id: int
     name: str
-    category: str
-    samples: list[Sample] = []
+    category_id: int
+    # samples: list[Sample] = []
 
     class Config:
         orm_mode = True

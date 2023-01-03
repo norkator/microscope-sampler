@@ -54,3 +54,16 @@ async def create_category(category: schemas.CategoryCreate, db: Session = Depend
     if db_category:
         raise HTTPException(status_code=400, detail="Category name already exists")
     return crud.create_category(db=db, category=category)
+
+
+@app.get("/sample-groups", response_model=list[schemas.SampleGroup])
+async def get_sample_groups(db: Session = Depends(get_db)):
+    return crud.get_sample_groups(db)
+
+
+@app.post("/sample-group", response_model=schemas.SampleGroup)
+async def create_sample_group(sample_group: schemas.SampleGroupCreate, db: Session = Depends(get_db)):
+    db_sample_group = crud.get_sample_group_by_name(db, name=sample_group.name)
+    if db_sample_group:
+        raise HTTPException(status_code=400, detail="Sample group name already exists")
+    return crud.create_sample_group(db=db, sample_group=sample_group)

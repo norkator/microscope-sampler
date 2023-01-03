@@ -50,7 +50,10 @@ export class SampleGroupsComponent implements OnInit {
 
   private getCategory(categoryId: number): void {
     this.sampleGroupService.getCategory(categoryId).subscribe({
-      next: (category: CategoryInterface) => this.category = category,
+      next: (category: CategoryInterface) => {
+        this.category = category;
+        this.sampleGroupFormGroup.controls['category_id'].setValue(this.category?.id || 0)
+      },
       error: (error: any) => console.error(error)
     })
   }
@@ -66,14 +69,14 @@ export class SampleGroupsComponent implements OnInit {
   }
 
   public createSampleGroup(): void {
-    if (this.sampleGroupFormGroup.valid) {
+    if (this.sampleGroupFormGroup.valid && this.sampleGroupFormGroup.controls['category_id'].value > 0) {
       this.sampleGroupService.createSampleGroup(
         this.sampleGroupFormGroup.controls['name'].value,
         this.sampleGroupFormGroup.controls['category_id'].value,
       ).subscribe({
         next: (data: SampleGroupInterface) => {
           this.sampleGroups.push(data);
-          // this.categoryFormGroup.controls['name'].setValue('');
+          this.sampleGroupFormGroup.controls['name'].setValue('');
           this.sampleGroupAddModalOpen = !this.sampleGroupAddModalOpen;
         },
         error: (error: any) => console.error(error)

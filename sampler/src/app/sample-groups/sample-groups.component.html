@@ -29,7 +29,8 @@
 
         <p>Will be created under category: {{category?.name}}</p>
         <br>
-        <input type="submit" value="Create" [disabled]="!sampleGroupFormGroup.valid">
+        <input type="submit" value="Create"
+               [disabled]="!sampleGroupFormGroup.valid || sampleGroupFormGroup.controls['category_id'].value === 0">
       </form>
     </div>
   </div>

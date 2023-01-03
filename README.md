@@ -10,12 +10,7 @@ image manager app. This app is intended to help with your own research and work 
 simple data store.
 
 ### Planned development
-
-* Directly connect to microscope camera interface connected to computer.
-* Sample images could be compared with earlier records.
-* Intended to be run as docker container. All data is saved locally
-  on sqlite database and local resource folder which contains saved images.
-* Maybe as an online hosted service with accounts.
+Using https://github.com/norkator/microscope-sampler/issues to list ideas.
 
 ### Attributions
 * Need to create attribution page for logo [Germ icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/germ)

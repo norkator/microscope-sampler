@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 import models
+import schemas
 from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -38,3 +39,8 @@ async def read_root():
 @app.get("/categories")
 async def get_categories():
     return [{"id": 1, "name": "Blood samples"}, {"id": 2, "name": "Something else"}]
+
+
+@app.post("/category")
+async def create_item(item: schemas.Category):
+    return item

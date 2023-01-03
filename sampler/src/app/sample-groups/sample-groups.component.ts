@@ -27,6 +27,7 @@ export class SampleGroupsComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params: Params | { category_id: number }) => {
       this.getCategory(params.category_id);
+      this.getSampleGroups(params.category_id);
     });
   }
 
@@ -35,12 +36,10 @@ export class SampleGroupsComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       category_id: [0, [Validators.required]],
     });
-
-    this.getSampleGroups();
   }
 
-  private getSampleGroups(): void {
-    this.sampleGroupService.getSampleGroups().subscribe({
+  private getSampleGroups(categoryId: number): void {
+    this.sampleGroupService.getSampleGroups(categoryId).subscribe({
       next: (data: SampleGroupInterface[]) => {
         this.sampleGroups = data;
       },

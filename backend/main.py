@@ -56,9 +56,9 @@ async def create_category(category: schemas.CategoryCreate, db: Session = Depend
     return crud.create_category(db=db, category=category)
 
 
-@app.get("/sample-groups", response_model=list[schemas.SampleGroup])
-async def get_sample_groups(db: Session = Depends(get_db)):
-    return crud.get_sample_groups(db)
+@app.get("/sample-groups/{category_id}", response_model=list[schemas.SampleGroup])
+async def get_sample_groups(category_id: int, db: Session = Depends(get_db)):
+    return crud.get_sample_groups(db, category_id)
 
 
 @app.post("/sample-group", response_model=schemas.SampleGroup)

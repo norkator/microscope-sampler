@@ -18,8 +18,8 @@ export class SampleGroupService {
     return this.http.get(environment.api + '/category/' + categoryId, ConstantsModule.httpOptions);
   }
 
-  getSampleGroups(): Observable<any> {
-    return this.http.get(environment.api + '/sample-groups', ConstantsModule.httpOptions);
+  getSampleGroups(categoryId: number): Observable<any> {
+    return this.http.get(environment.api + '/sample-groups/' + categoryId, ConstantsModule.httpOptions);
   }
 
   createSampleGroup(name: string, categoryId: number): Observable<any> {

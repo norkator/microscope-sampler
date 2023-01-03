@@ -32,8 +32,8 @@ def get_sample_group(db: Session, sample_group_id: int):
     return db.query(models.SampleGroup).filter(models.SampleGroup.id == sample_group_id).first()
 
 
-def get_sample_groups(db: Session):
-    return db.query(models.SampleGroup).all()
+def get_sample_groups(db: Session, category_id: int):
+    return db.query(models.SampleGroup).filter(models.SampleGroup.category_id == category_id).all()
 
 
 def get_sample_group_by_name(db: Session, name: str):

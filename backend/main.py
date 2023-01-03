@@ -43,8 +43,8 @@ async def get_categories(db: Session = Depends(get_db)):
     return crud.get_categories(db)
 
 
-@app.get("/category/{category_id}", response_model=list[schemas.Category])
-async def get_categories(category_id: int, db: Session = Depends(get_db)):
+@app.get("/category/{category_id}", response_model=schemas.Category)
+async def get_category(category_id: int, db: Session = Depends(get_db)):
     return crud.get_category(db, category_id=category_id)
 
 

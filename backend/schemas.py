@@ -10,6 +10,7 @@ class CategoryCreate(CategoryBase):
 
 
 class Category(CategoryBase):
+    id: int
     name: str
 
     class Config:
@@ -28,6 +29,7 @@ class SampleCreate(SampleBase):
 
 
 class Sample(SampleBase):
+    id: int
     sample_group: int
 
     class Config:
@@ -47,6 +49,7 @@ class SampleGroupCreate(SampleGroupBase):
 
 
 class SampleGroup(SampleGroupBase):
+    id: int
     name: str
     category: str
     samples: list[Sample] = []

@@ -10,7 +10,6 @@ import {CategoryMenuComponent} from "./category-menu/category-menu.component";
 import {SampleGroupsComponent} from './sample-groups/sample-groups.component';
 import {SampleComponent} from './sample/sample.component';
 import {ModalComponent} from './ui-components/modal/modal.component';
-import {NavigationHelperComponent} from './ui-components/navigation-helper/navigation-helper.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import {NavigationHelperComponent} from './ui-components/navigation-helper/navig
     SampleGroupsComponent,
     SampleComponent,
     ModalComponent,
-    NavigationHelperComponent,
   ],
   imports: [
     BrowserModule,

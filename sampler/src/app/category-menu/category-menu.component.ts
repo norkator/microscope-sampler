@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryInterfaces} from "../interfaces";
+import {CategoryInterface} from "../interfaces";
 import {CategoryService} from "./category.service";
 import {NavigationExtras, Router} from "@angular/router";
 import {Validators, FormGroup, FormBuilder} from "@angular/forms";
@@ -11,7 +11,7 @@ import {Validators, FormGroup, FormBuilder} from "@angular/forms";
 })
 export class CategoryMenuComponent implements OnInit {
 
-  public categories: CategoryInterfaces[] = [];
+  public categories: CategoryInterface[] = [];
   public selectedCategoryId: number = 0;
   public categoryAddModalOpen: boolean = false;
 
@@ -35,7 +35,7 @@ export class CategoryMenuComponent implements OnInit {
 
   private getCategories(): void {
     this.categoryService.getCategories().subscribe({
-      next: (data: CategoryInterfaces[]) => {
+      next: (data: CategoryInterface[]) => {
         this.categories = data;
       },
       error: (error: any) => console.error(error)

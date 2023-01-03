@@ -1,1 +1,15 @@
-<h1>Sample groups</h1>
+<h1>{{categoryName}} - Choose sample groups</h1>
+
+<div class="flex-container">
+  <app-board-button
+    *ngFor="let sampleGroup of sampleGroups"
+    [isAddBtn]="false" [title]="sampleGroup.name"
+    [isSelected]="selectedSampleGroupId === sampleGroup.id"
+    (click)="openSampleGroup(sampleGroup.id)"
+  ></app-board-button>
+  <app-board-button
+    [isAddBtn]="true" title="Add new"
+    [isSelected]="false"
+    (click)="sampleGroupAddModalOpen = !sampleGroupAddModalOpen"
+  ></app-board-button>
+</div>

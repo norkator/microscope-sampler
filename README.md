@@ -17,6 +17,9 @@ simple data store.
   on sqlite database and local resource folder which contains saved images.
 * Maybe as an online hosted service with accounts.
 
+### Attributions
+* Need to create attribution page for logo [Germ icons created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/germ)
+
 ## Getting started as user
 
 Todo...

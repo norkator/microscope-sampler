@@ -1,8 +1,8 @@
-<h2 *ngIf="sample == null">No sample selected</h2>
-<h2 *ngIf="sample != null">{{sample.name || 'New sample'}}</h2>
+<h2 *ngIf="sample === null">No sample selected</h2>
+<h2 *ngIf="sample !== null">{{sample.name || 'New sample'}}</h2>
 
 
-<div class="content-grid">
+<div *ngIf="sample !== null" class="content-grid">
   <div class="grid-item">
     <div>
       <p>Sample basic details</p>

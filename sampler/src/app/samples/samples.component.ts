@@ -13,7 +13,7 @@ export class SamplesComponent implements OnInit {
 
   public sampleGroup: SampleGroupInterface | null = null;
   public samples: SampleInterface[] = [];
-  public selectedSample: SampleInterface | null = {id: 0, name: ''};
+  public selectedSample: SampleInterface | null = null; // {id: 0, name: ''};
 
   constructor(
     private sampleService: SampleService,

@@ -8,6 +8,7 @@ export interface SampleGroupInterface {
   name: string;
   description: string;
   category_id: number;
+  category?: CategoryInterface;
 }
 
 export interface SampleInterface {

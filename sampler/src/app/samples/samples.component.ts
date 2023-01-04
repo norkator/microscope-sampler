@@ -29,12 +29,13 @@ export class SamplesComponent implements OnInit {
   }
 
   private getSampleGroup(sampleGroupId: number): void {
-    // this.sampleGroupService.getSampleGroups(categoryId).subscribe({
-    //   next: (data: SampleGroupInterface[]) => {
-    //     this.sampleGroups = data;
-    //   },
-    //   error: (error: any) => console.error(error)
-    // });
+    this.sampleService.getSampleGroup(sampleGroupId).subscribe({
+      next: (data: SampleGroupInterface) => {
+        console.info(data);
+        this.sampleGroup = data;
+      },
+      error: (error: any) => console.error(error)
+    });
   }
 
   public openSample(id: number): void {

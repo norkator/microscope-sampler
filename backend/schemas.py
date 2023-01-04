@@ -52,6 +52,7 @@ class SampleGroup(SampleGroupBase):
     id: int
     name: str
     category_id: int
+    category: Category
     # samples: list[Sample] = []
 
     class Config:

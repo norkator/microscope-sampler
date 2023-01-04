@@ -17,6 +17,7 @@ class SampleGroup(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     category_id = Column(Integer, ForeignKey("sample_category.id"))
+    category = relationship("Category")
 
     samples = relationship("Sample", back_populates="sample_group")
 

@@ -9,3 +9,8 @@ export interface SampleGroupInterface {
   description: string;
   category_id: number;
 }
+
+export interface SampleInterface {
+  id: number;
+  name: string;
+}

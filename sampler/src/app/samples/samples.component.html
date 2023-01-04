@@ -1,0 +1,18 @@
+<h1 routerLink="/"><a>{{sampleGroup?.name}}</a> /</h1><h2>Choose sample</h2>
+
+<div class="flex-container">
+  <app-board-button
+    *ngFor="let sample of samples"
+    [isAddBtn]="false" [title]="sample.name"
+    [isSelected]="false"
+    (click)="openSample(sample.id)"
+  ></app-board-button>
+  <app-board-button
+    [isAddBtn]="true" title="Add sample"
+    [isSelected]="false"
+  ></app-board-button>
+</div>
+
+<hr>
+
+<app-sample></app-sample>

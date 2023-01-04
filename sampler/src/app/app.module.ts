@@ -8,8 +8,9 @@ import {AppComponent} from './app.component';
 import {BoardButtonComponent} from './ui-components/board-button/board-button.component';
 import {CategoryMenuComponent} from "./category-menu/category-menu.component";
 import {SampleGroupsComponent} from './sample-groups/sample-groups.component';
-import {SampleComponent} from './sample/sample.component';
+import {SampleComponent} from './samples/sample/sample.component';
 import {ModalComponent} from './ui-components/modal/modal.component';
+import {SamplesComponent} from './samples/samples.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ModalComponent} from './ui-components/modal/modal.component';
     SampleGroupsComponent,
     SampleComponent,
     ModalComponent,
+    SamplesComponent,
   ],
   imports: [
     BrowserModule,

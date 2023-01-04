@@ -64,7 +64,7 @@ export class SampleGroupsComponent implements OnInit {
         sample_group_id: id,
       }
     };
-    this.router.navigate(['sample'], navigationExtras).then(() => null);
+    this.router.navigate(['samples'], navigationExtras).then(() => null);
   }
 
   public createSampleGroup(): void {

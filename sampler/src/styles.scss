@@ -61,21 +61,6 @@ p {
   margin: 10px;
 }
 
-.content-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 0;
-}
-
-.content-grid-menu {
-  display: flex;
-  padding: 0 16px;
-  flex-direction: column;
-  text-align: center;
-}
-
 svg.material-icons {
   height: 24px;
   width: auto;
@@ -266,4 +251,12 @@ input[type=submit]:disabled {
 
 input[type=submit]:hover:not(:disabled) {
   background-color: #45a049;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-style: dashed;
+  border-color: rgb(136, 136, 136);
+  border-width: 1px;
 }

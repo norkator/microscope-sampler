@@ -1,1 +1,28 @@
-<h1>Sample</h1>
+<h2 *ngIf="sample == null">No sample selected</h2>
+<h2 *ngIf="sample != null">{{sample.name || 'New sample'}}</h2>
+
+
+<div class="content-grid">
+  <div class="grid-item">
+    <div>
+      <p>Sample basic details</p>
+      <div class="input-form-container">
+        <form [formGroup]="sampleFormGroup" (ngSubmit)="saveSample()">
+          <label for="sampleName">Sample name</label>
+          <input formControlName="name" type="text" id="sampleName" name="sample_name"
+                 placeholder="Sample name">
+
+          <input type="submit" value="Save"
+                 [disabled]="!sampleFormGroup.valid">
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="grid-item">
+    <div class="sample-camera-container">
+      <button id="showVideo" class="camera-control-btn" (click)="init($event)">Start camera</button>
+      <video #video class="sample-camera" autoplay="autoplay" id="cameraVideoElement"></video>
+    </div>
+  </div>
+</div>
+

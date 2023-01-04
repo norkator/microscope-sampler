@@ -13,7 +13,7 @@ export class SamplesComponent implements OnInit {
 
   public sampleGroup: SampleGroupInterface | null = null;
   public samples: SampleInterface[] = [];
-  public selectedSample: SampleInterface | null = null;
+  public selectedSample: SampleInterface | null = {id: 0, name: ''};
 
   constructor(
     private sampleService: SampleService,
@@ -31,7 +31,6 @@ export class SamplesComponent implements OnInit {
   private getSampleGroup(sampleGroupId: number): void {
     this.sampleService.getSampleGroup(sampleGroupId).subscribe({
       next: (data: SampleGroupInterface) => {
-        console.info(data);
         this.sampleGroup = data;
       },
       error: (error: any) => console.error(error)
@@ -41,7 +40,8 @@ export class SamplesComponent implements OnInit {
   public openSample(id: number): void {
   }
 
-  public createSample(): void {
+  public newSampleTemplate(): void {
+    this.selectedSample = {id: 0, name: ''} as SampleInterface;
   }
 
 }

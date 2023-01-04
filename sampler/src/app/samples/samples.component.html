@@ -12,9 +12,13 @@
   <app-board-button
     [isAddBtn]="true" title="Add sample"
     [isSelected]="false"
+    (click)="newSampleTemplate()"
   ></app-board-button>
 </div>
 
 <hr>
 
-<app-sample></app-sample>
+<app-sample
+  [sample]="selectedSample"
+></app-sample>
+

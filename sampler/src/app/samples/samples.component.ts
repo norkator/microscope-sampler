@@ -47,7 +47,8 @@ export class SamplesComponent implements OnInit {
     });
   }
 
-  public openSample(id: number): void {
+  public openSample(sample: SampleInterface): void {
+    this.selectedSample = sample;
   }
 
   public newSampleTemplate(): void {

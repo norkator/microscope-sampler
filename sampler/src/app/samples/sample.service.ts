@@ -34,9 +34,10 @@ export class SampleService {
     }, ConstantsModule.httpOptions);
   }
 
-  updateSample(name: string): Observable<any> {
+  updateSample(name: string, dateTime: string): Observable<any> {
     return this.http.patch(environment.api + '/sample', {
       name: name,
+      date_time: dateTime,
     }, ConstantsModule.httpOptions);
   }
 

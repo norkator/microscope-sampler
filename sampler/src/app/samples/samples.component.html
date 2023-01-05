@@ -7,7 +7,7 @@
     *ngFor="let sample of samples"
     [isAddBtn]="false" [title]="sample.name"
     [isSelected]="false"
-    (click)="openSample(sample.id)"
+    (click)="openSample(sample)"
   ></app-board-button>
   <app-board-button
     [isAddBtn]="true" title="Add sample"

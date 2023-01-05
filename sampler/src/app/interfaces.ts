@@ -14,4 +14,7 @@ export interface SampleGroupInterface {
 export interface SampleInterface {
   id: number;
   name: string;
+  date_time: string;
+  description: string | null;
+  sample_group_id: number;
 }

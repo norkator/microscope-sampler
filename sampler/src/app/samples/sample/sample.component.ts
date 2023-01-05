@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {SampleInterface} from "../../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleService} from "../sample.service";
@@ -26,19 +26,35 @@ export class SampleComponent implements OnInit {
   ngOnInit(): void {
     this.sampleFormGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      date_time: [this.getCurrentDatetime(), [Validators.required]],
+      date_time: [this.getFormattedDate(new Date()), [Validators.required]],
     });
   }
 
-  private getCurrentDatetime(): string {
-    const d = new Date();
-    return (new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString()).slice(0, -1);
+  ngOnChanges(changes: SimpleChanges | any) {
+    if (changes.sample && this.sample && this.sample.id > 0) {
+      this.sampleFormGroup.controls['name'].setValue(this.sample.name);
+      this.sampleFormGroup.controls['date_time'].setValue(
+        this.getFormattedDate(new Date(Date.parse(this.sample.date_time)))
+      );
+    }
+  }
+
+  private getFormattedDate(date: Date): string {
+    return (new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString()).slice(0, -1);
   }
 
   public saveSample(): void {
     if (this.sampleGroupId && this.sampleGroupId > 0) {
       if (this.sample?.id) {
-        console.info('update existing sample');
+        this.sampleService.updateSample(
+          this.sampleFormGroup.controls['name'].value,
+          this.sampleFormGroup.controls['date_time'].value,
+        ).subscribe({
+          next: (data: SampleInterface) => {
+            this.sample = data;
+          },
+          error: (error: any) => console.error(error)
+        });
       } else {
         this.sampleService.createSample(
           this.sampleFormGroup.controls['name'].value,

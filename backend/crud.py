@@ -78,3 +78,12 @@ def create_sample(db: Session, sample: schemas.SampleCreate):
     db.commit()
     db.refresh(db_sample)
     return db_sample
+
+
+def update_sample(db: Session, sample: schemas.Sample, db_sample: schemas.Sample):
+    db_sample.name = sample.name
+    db_sample.date_time = sample.date_time
+    db.add(db_sample)
+    db.commit()
+    db.refresh(db_sample)
+    return db_sample

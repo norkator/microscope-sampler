@@ -105,8 +105,11 @@ async def create_sample(sample: schemas.SampleCreate, db: Session = Depends(get_
     return crud.create_sample(db=db, sample=sample)
 
 
-@app.patch("/sample", response_model=schemas.Sample)
+@app.put("/sample", response_model=schemas.Sample)
 async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
-    return {}
+    db_sample = crud.get_sample(db, sample_id=sample.id)
+    if not db_sample:
+        raise HTTPException(status_code=400, detail="Sample not found with given sample id")
+    return crud.update_sample(db, sample, db_sample)
 
 # --------------------------------------------

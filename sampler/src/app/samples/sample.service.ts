@@ -34,10 +34,12 @@ export class SampleService {
     }, ConstantsModule.httpOptions);
   }
 
-  updateSample(name: string, dateTime: string): Observable<any> {
-    return this.http.patch(environment.api + '/sample', {
+  updateSample(id: number, name: string, dateTime: string, sampleGroupId: number): Observable<any> {
+    return this.http.put(environment.api + '/sample', {
+      id: id,
       name: name,
       date_time: dateTime,
+      sample_group_id: sampleGroupId,
     }, ConstantsModule.httpOptions);
   }
 

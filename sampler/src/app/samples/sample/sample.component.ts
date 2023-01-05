@@ -47,8 +47,10 @@ export class SampleComponent implements OnInit {
     if (this.sampleGroupId && this.sampleGroupId > 0) {
       if (this.sample?.id) {
         this.sampleService.updateSample(
+          this.sample.id,
           this.sampleFormGroup.controls['name'].value,
           this.sampleFormGroup.controls['date_time'].value,
+          this.sample.sample_group_id,
         ).subscribe({
           next: (data: SampleInterface) => {
             this.sample = data;

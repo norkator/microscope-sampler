@@ -19,7 +19,24 @@
     </div>
   </div>
   <div class="grid-item">
-
+    <div class="flex-container">
+      <!-- Todo ngFor here to render sample images -->
+      <app-sample-image></app-sample-image>
+    </div>
   </div>
 </div>
 
+
+<app-modal
+  (modalClosedClick)="cameraModalOpen = !cameraModalOpen"
+  [isOpen]="cameraModalOpen"
+  title="Take sample image">
+  <app-camera-image></app-camera-image>
+</app-modal>
+
+<app-modal
+  (modalClosedClick)="imageUploadModalOpen = !imageUploadModalOpen"
+  [isOpen]="imageUploadModalOpen"
+  title="Upload sample image">
+  <app-upload-image></app-upload-image>
+</app-modal>

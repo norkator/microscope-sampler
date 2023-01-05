@@ -11,6 +11,8 @@ export class SampleComponent implements OnInit {
 
   @Input() public sample: SampleInterface | null = null;
 
+  public cameraModalOpen: boolean = false;
+  public imageUploadModalOpen: boolean = false;
   public sampleFormGroup!: FormGroup;
 
   constructor(

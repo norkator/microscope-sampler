@@ -36,7 +36,10 @@ class SampleCreate(SampleBase):
 
 class Sample(SampleBase):
     id: int
-    sample_group: int
+    name: str
+    date_time: datetime
+    description: str | None = None
+    sample_group_id: int
 
     class Config:
         orm_mode = True

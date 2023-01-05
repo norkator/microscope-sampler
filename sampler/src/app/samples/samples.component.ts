@@ -22,6 +22,7 @@ export class SamplesComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((params: Params | { sample_group_id: number }) => {
       this.getSampleGroup(params.sample_group_id);
+      this.getSamples(params.sample_group_id);
     });
   }
 
@@ -32,6 +33,15 @@ export class SamplesComponent implements OnInit {
     this.sampleService.getSampleGroup(sampleGroupId).subscribe({
       next: (data: SampleGroupInterface) => {
         this.sampleGroup = data;
+      },
+      error: (error: any) => console.error(error)
+    });
+  }
+
+  private getSamples(sampleGroupId: number): void {
+    this.sampleService.getSamples(sampleGroupId).subscribe({
+      next: (data: SampleInterface[]) => {
+        this.samples = data;
       },
       error: (error: any) => console.error(error)
     });

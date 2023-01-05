@@ -22,6 +22,18 @@
     <div class="flex-container">
       <!-- Todo ngFor here to render sample images -->
       <app-sample-image></app-sample-image>
+      <app-board-button
+        size="small"
+        [isAddBtn]="true" title="Capture from camera"
+        [isSelected]="false"
+        (click)="cameraModalOpen = !cameraModalOpen"
+      ></app-board-button>
+      <app-board-button
+        size="small"
+        [isAddBtn]="true" title="Upload image"
+        [isSelected]="false"
+        (click)="imageUploadModalOpen = !imageUploadModalOpen"
+      ></app-board-button>
     </div>
   </div>
 </div>

@@ -9,36 +9,3 @@
 .grid-container {
   display: grid;
 }
-
-.sample-camera-container {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  position: relative;
-}
-
-.camera-control-btn {
-  position: absolute;
-  margin-top: 20px;
-  margin-left: 20px;
-  z-index: 999;
-}
-
-.sample-camera {
-  width: 95%;
-  height: auto;
-  max-width: 1000px;
-  max-height: 800px;
-  background-color: #fcfcfc;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  line-height: 24px;
-  border-style: dashed;
-  border-radius: 25px;
-  border-color: rgba(161, 161, 161, 0.70);
-  border-width: 2px;
-  padding: 10px;
-}

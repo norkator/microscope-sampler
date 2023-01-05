@@ -13,10 +13,15 @@ export class CameraImageComponent implements OnInit {
     video: true
   };
 
+  public cameraRunning: boolean = false;
+
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  public captureImage(): void {
   }
 
   private handleSuccess(stream: any) {
@@ -51,6 +56,7 @@ export class CameraImageComponent implements OnInit {
       const stream = await navigator.mediaDevices.getUserMedia(this.constraints);
       this.handleSuccess(stream);
       e.target.disabled = true;
+      this.cameraRunning = true;
     } catch (e) {
       this.handleError(e);
     }

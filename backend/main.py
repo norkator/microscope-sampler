@@ -89,19 +89,20 @@ async def create_sample_group(sample_group: schemas.SampleGroupCreate, db: Sessi
 
 @app.get("/samples/{sample_group_id}", response_model=list[schemas.Sample])
 async def get_samples(sample_group_id: int, db: Session = Depends(get_db)):
-    # return crud.get_samples(db, sample_group_id)
-    return []
+    return crud.get_samples(db, sample_group_id)
 
 
 @app.get("/sample/{sample_id}", response_model=schemas.Sample)
 async def get_sample(sample_id: int, db: Session = Depends(get_db)):
-    # return crud.get_sample(db, sample_id)
-    return {}
+    return crud.get_sample(db, sample_id)
 
 
 @app.post("/sample", response_model=schemas.Sample)
 async def create_sample(sample: schemas.SampleCreate, db: Session = Depends(get_db)):
-    return {}
+    db_sample = crud.get_sample_by_name_and_group(db, name=sample.name, sample_group_id=sample.sample_group_id)
+    if db_sample:
+        raise HTTPException(status_code=400, detail="Sample name within same sample group already exists")
+    return crud.create_sample(db=db, sample=sample)
 
 
 @app.patch("/sample", response_model=schemas.Sample)

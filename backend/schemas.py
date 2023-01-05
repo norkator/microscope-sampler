@@ -25,7 +25,9 @@ class SampleBase(BaseModel):
 
 
 class SampleCreate(SampleBase):
-    pass
+    name: str
+    date_time: str
+    sample_group_id: int
 
 
 class Sample(SampleBase):
@@ -53,6 +55,7 @@ class SampleGroup(SampleGroupBase):
     name: str
     category_id: int
     category: Category
+
     # samples: list[Sample] = []
 
     class Config:

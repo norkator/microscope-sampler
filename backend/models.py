@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -24,6 +24,7 @@ class Sample(Base):
     __tablename__ = "sample"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
+    name = Column(String, index=True)
+    date_time = Column(DateTime, index=False)
     description = Column(String, index=True)
     sample_group_id = Column(Integer, ForeignKey("sample_group.id"))

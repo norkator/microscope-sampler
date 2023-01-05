@@ -1,1 +1,4 @@
-<p>camera-image works!</p>
+<div class="sample-camera-container">
+  <button id="showVideo" class="camera-control-btn" (click)="init($event)">Start camera</button>
+  <video #video class="sample-camera" autoplay="autoplay" id="cameraVideoElement"></video>
+</div>

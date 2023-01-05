@@ -1,5 +1,5 @@
 <h2 *ngIf="sample === null">No sample selected</h2>
-<h2 *ngIf="sample !== null">{{sample.name || 'New sample'}}</h2>
+<h2 *ngIf="sample !== null">{{sample.name || 'New sample basic details'}}</h2>
 
 
 <div *ngIf="sample !== null" class="content-grid">
@@ -12,6 +12,10 @@
           <input formControlName="name" type="text" id="sampleName" name="sample_name"
                  placeholder="Sample name">
 
+          <label for="sampleDatetime">Sample date and time</label>
+          <input formControlName="date_time" type="datetime-local" id="sampleDatetime" name="sample_date_time"
+                 placeholder="Sample date and time">
+
           <input type="submit" value="Save"
                  [disabled]="!sampleFormGroup.valid">
         </form>
@@ -19,7 +23,10 @@
     </div>
   </div>
   <div class="grid-item">
-    <div class="flex-container">
+    <h3 *ngIf="!sample.id || sample.id === 0">
+      You need to define and save new sample basic details before you can add images
+    </h3>
+    <div *ngIf="sample.id && sample.id > 0" class="flex-container">
       <!-- Todo ngFor here to render sample images -->
       <app-sample-image></app-sample-image>
       <app-board-button

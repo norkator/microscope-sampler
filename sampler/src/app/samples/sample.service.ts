@@ -26,9 +26,10 @@ export class SampleService {
     return this.http.get(environment.api + '/samples/' + sampleGroupId, ConstantsModule.httpOptions);
   }
 
-  createSample(name: string, sampleGroupId: number): Observable<any> {
+  createSample(name: string, dateTime: string, sampleGroupId: number): Observable<any> {
     return this.http.post(environment.api + '/sample', {
       name: name,
+      date_time: dateTime,
       sample_group_id: sampleGroupId,
     }, ConstantsModule.httpOptions);
   }

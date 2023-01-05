@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SampleInterface} from "../../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleService} from "../sample.service";
@@ -12,6 +12,8 @@ export class SampleComponent implements OnInit {
 
   @Input() public sample: SampleInterface | null = null;
   @Input() public sampleGroupId: number | undefined;
+  @Output() public sampleCreated = new EventEmitter();
+  @Output() public sampleUpdated = new EventEmitter();
 
   public cameraModalOpen: boolean = false;
   public imageUploadModalOpen: boolean = false;
@@ -54,6 +56,7 @@ export class SampleComponent implements OnInit {
         ).subscribe({
           next: (data: SampleInterface) => {
             this.sample = data;
+            this.sampleUpdated.emit(this.sample);
           },
           error: (error: any) => console.error(error)
         });
@@ -65,6 +68,7 @@ export class SampleComponent implements OnInit {
         ).subscribe({
           next: (data: SampleInterface) => {
             this.sample = data;
+            this.sampleCreated.emit(this.sample);
           },
           error: (error: any) => console.error(error)
         });

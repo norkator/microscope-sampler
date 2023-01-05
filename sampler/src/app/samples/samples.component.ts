@@ -55,4 +55,12 @@ export class SamplesComponent implements OnInit {
     this.selectedSample = {id: 0, name: ''} as SampleInterface;
   }
 
+  public sampleCreated(sample: SampleInterface): void {
+    this.samples.push(sample);
+  }
+
+  public sampleUpdated(sample: SampleInterface): void {
+    // Todo update sample array
+  }
+
 }

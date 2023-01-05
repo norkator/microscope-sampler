@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -20,13 +22,15 @@ class Category(CategoryBase):
 # --------------------------------------------
 
 class SampleBase(BaseModel):
-    title: str
+    name: str
+    date_time: datetime
     description: str | None = None
+    sample_group_id: int
 
 
 class SampleCreate(SampleBase):
     name: str
-    date_time: str
+    date_time: datetime
     sample_group_id: int
 
 

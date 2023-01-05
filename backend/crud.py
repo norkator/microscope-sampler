@@ -68,7 +68,6 @@ def get_sample_by_name_and_group(db: Session, name: str, sample_group_id: int):
 
 
 def create_sample(db: Session, sample: schemas.SampleCreate):
-    # noinspection PyTypeChecker
     db_sample = models.Sample(
         name=sample.name,
         date_time=sample.date_time,

@@ -97,7 +97,7 @@ async def get_sample(sample_id: int, db: Session = Depends(get_db)):
     return crud.get_sample(db, sample_id)
 
 
-@app.post("/sample", response_model=schemas.Sample)
+@app.post("/sample")
 async def create_sample(sample: schemas.SampleCreate, db: Session = Depends(get_db)):
     db_sample = crud.get_sample_by_name_and_group(db, name=sample.name, sample_group_id=sample.sample_group_id)
     if db_sample:

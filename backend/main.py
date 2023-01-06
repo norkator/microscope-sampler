@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -111,5 +111,11 @@ async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
     if not db_sample:
         raise HTTPException(status_code=400, detail="Sample not found with given sample id")
     return crud.update_sample(db, sample, db_sample)
+
+
+@app.post("/sample-image")
+async def create_upload_sample_image(file: UploadFile):
+    print(file.filename)
+    return {"filename": file.filename}
 
 # --------------------------------------------

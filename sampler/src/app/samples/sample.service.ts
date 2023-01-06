@@ -43,4 +43,12 @@ export class SampleService {
     }, ConstantsModule.httpOptions);
   }
 
+  uploadSampleImage(fileName: string, contentType: string, file: any): Observable<any> {
+    return this.http.post(environment.api + '/sample-image', {
+      filename: fileName,
+      content_type: contentType,
+      file: file,
+    }, ConstantsModule.httpOptions);
+  }
+
 }

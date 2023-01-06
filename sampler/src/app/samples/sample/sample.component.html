@@ -50,7 +50,9 @@
   (modalClosedClick)="cameraModalOpen = !cameraModalOpen"
   [isOpen]="cameraModalOpen"
   title="Take sample image">
-  <app-camera-image></app-camera-image>
+  <app-camera-image
+    [sampleId]="sample?.id"
+  ></app-camera-image>
 </app-modal>
 
 <app-modal

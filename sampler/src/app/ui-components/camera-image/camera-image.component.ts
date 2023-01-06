@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SampleService} from "../../samples/sample.service";
 
 @Component({
   selector: 'app-camera-image',
@@ -6,6 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./camera-image.component.scss']
 })
 export class CameraImageComponent implements OnInit {
+  @Input() public sampleId: number | undefined = undefined;
 
   // @ts-ignore
   private constraints: any = window.constraints = {
@@ -18,7 +20,9 @@ export class CameraImageComponent implements OnInit {
 
   public cameraRunning: boolean = false;
 
-  constructor() {
+  constructor(
+    private sampleService: SampleService,
+  ) {
   }
 
   ngOnInit(): void {

@@ -1,9 +1,13 @@
+<h4>Either upload image manually</h4>
 <div class="form-group">
   <label for="fileInput">Choose File</label>
   <input type="file" id="fileInput" #fileInput
          (change)="fileSelected($event)">
 </div>
 
+<hr>
+
+<h4>or by capturing from camera</h4>
 <div class="sample-camera-container">
   <div class="camera-control-btn">
     <app-board-button
@@ -24,6 +28,6 @@
   (click)="captureImage()"
 ></app-board-button>
 
-<canvas #canvas id="canvas"></canvas>
 
-<canvas #canvas2 id="canvas2"></canvas>
+<!-- holder for captured images from camera -->
+<canvas #captureCanvas id="captureCanvas"></canvas>

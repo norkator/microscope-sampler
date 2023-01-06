@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SampleService} from "../../samples/sample.service";
 
 @Component({
@@ -8,6 +8,7 @@ import {SampleService} from "../../samples/sample.service";
 })
 export class UploadImageComponent implements OnInit {
   @Input() public sampleId: number | undefined = undefined;
+  @Output() public imageUploaded = new EventEmitter();
 
   // @ts-ignore
   private constraints: any = window.constraints = {
@@ -16,8 +17,12 @@ export class UploadImageComponent implements OnInit {
   };
 
   private video: HTMLVideoElement | null = null;
+  private captureCanvas: HTMLCanvasElement | null = null;
+  private fileInput: HTMLInputElement | null = null;
   public cameraRunning: boolean = false;
-  private fileToUpload: File | null = null;
+  private videoCaptureWidth: number = 0;
+  private videoCaptureHeight: number = 0;
+
 
   constructor(
     private sampleService: SampleService,
@@ -26,6 +31,17 @@ export class UploadImageComponent implements OnInit {
 
   ngOnInit(): void {
     this.video = document.querySelector('video');
+    this.captureCanvas = document.getElementById('captureCanvas') as HTMLCanvasElement;
+    this.fileInput = document.getElementById('fileInput') as HTMLInputElement;
+
+    if (this.video !== null) {
+      const _this = this;
+      this.video.addEventListener('loadedmetadata', function (e) {
+        console.log(this.videoWidth, this.videoHeight);
+        _this.videoCaptureWidth = this.videoWidth;
+        _this.videoCaptureHeight = this.videoHeight;
+      }, false);
+    }
   }
 
   public fileSelected(event: any): void {
@@ -34,6 +50,7 @@ export class UploadImageComponent implements OnInit {
       this.sampleService.uploadSampleImage(file).subscribe({
         next: (data: any) => {
           console.info(data);
+          this.imageUploaded.emit();
         },
         error: (error: any) => console.error(error)
       });
@@ -41,6 +58,34 @@ export class UploadImageComponent implements OnInit {
   }
 
   public captureImage(): void {
+    if (this.video !== null && this.captureCanvas !== null) {
+      const ctx = this.captureCanvas.getContext("2d");
+      this.captureCanvas.width = this.videoCaptureWidth;
+      this.captureCanvas.height = this.videoCaptureHeight;
+      // @ts-ignore
+      ctx.drawImage(this.video, 0, 0, this.videoCaptureWidth, this.videoCaptureHeight);
+      this.captureCanvas.toBlob((blob: Blob | null) => {
+        if (blob !== null) {
+          const file = new File([blob], String(Date.now()) + '.jpeg');
+          const dT = new DataTransfer();
+          dT.items.add(file);
+          // @ts-ignore
+          this.fileInput.files = dT.files;
+          if (this.fileInput?.files) {
+            this.sampleService.uploadSampleImage(this.fileInput.files[0]).subscribe({
+              next: (data: any) => {
+                console.info(data);
+                this.stopStream();
+                this.imageUploaded.emit();
+              },
+              error: (error: any) => console.error(error)
+            });
+          }
+        }
+      });
+    } else {
+      console.error('video, captureCanvas ir fileInput is null');
+    }
   }
 
   private handleSuccess(stream: any) {

@@ -31,12 +31,6 @@
       <app-sample-image></app-sample-image>
       <app-board-button
         size="small"
-        [isAddBtn]="true" title="Capture from camera"
-        [isSelected]="false"
-        (click)="cameraModalOpen = !cameraModalOpen"
-      ></app-board-button>
-      <app-board-button
-        size="small"
         [isAddBtn]="true" title="Upload image"
         [isSelected]="false"
         (click)="imageUploadModalOpen = !imageUploadModalOpen"
@@ -47,17 +41,10 @@
 
 
 <app-modal
-  (modalClosedClick)="cameraModalOpen = !cameraModalOpen"
-  [isOpen]="cameraModalOpen"
-  title="Take sample image">
-  <app-camera-image
-    [sampleId]="sample?.id"
-  ></app-camera-image>
-</app-modal>
-
-<app-modal
   (modalClosedClick)="imageUploadModalOpen = !imageUploadModalOpen"
   [isOpen]="imageUploadModalOpen"
   title="Upload sample image">
-  <app-upload-image></app-upload-image>
+  <app-upload-image
+    [sampleId]="sample?.id"
+  ></app-upload-image>
 </app-modal>

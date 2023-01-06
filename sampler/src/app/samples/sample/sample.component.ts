@@ -15,7 +15,6 @@ export class SampleComponent implements OnInit {
   @Output() public sampleCreated = new EventEmitter();
   @Output() public sampleUpdated = new EventEmitter();
 
-  public cameraModalOpen: boolean = false;
   public imageUploadModalOpen: boolean = false;
   public sampleFormGroup!: FormGroup;
 

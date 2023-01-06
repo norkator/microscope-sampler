@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {ConstantsModule} from "../constants-module";
@@ -43,12 +43,13 @@ export class SampleService {
     }, ConstantsModule.httpOptions);
   }
 
-  uploadSampleImage(fileName: string, contentType: string, file: any): Observable<any> {
-    return this.http.post(environment.api + '/sample-image', {
-      filename: fileName,
-      content_type: contentType,
-      file: file,
-    }, ConstantsModule.httpOptions);
+  uploadSampleImage(file: File): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'multipart/form-data',
+    });
+    let formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post(environment.api + '/sample-image', formData);
   }
 
 }

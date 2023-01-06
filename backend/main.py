@@ -114,8 +114,10 @@ async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
 
 
 @app.post("/sample-image")
-async def create_upload_sample_image(file: UploadFile):
-    print(file.filename)
-    return {"filename": file.filename}
+async def create_upload_sample_image(file: UploadFile | None = None):
+    if not file:
+        return {"message": "No upload file sent"}
+    else:
+        return {"filename": file.filename}
 
 # --------------------------------------------

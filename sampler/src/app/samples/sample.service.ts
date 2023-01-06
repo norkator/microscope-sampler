@@ -43,13 +43,13 @@ export class SampleService {
     }, ConstantsModule.httpOptions);
   }
 
-  uploadSampleImage(file: File): Observable<any> {
+  uploadSampleImage(sampleId: number, file: File): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
+      'sampleid': String(sampleId),
     });
     let formData: FormData = new FormData();
     formData.append('file', file);
-    return this.http.post(environment.api + '/sample-image', formData);
+    return this.http.post(environment.api + '/sample-image', formData, {headers});
   }
 
 }

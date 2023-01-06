@@ -75,4 +75,8 @@ export class SampleComponent implements OnInit {
     }
   }
 
+  public imageUploaded(): void {
+    this.imageUploadModalOpen = false;
+  }
+
 }

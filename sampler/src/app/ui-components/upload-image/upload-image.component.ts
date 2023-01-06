@@ -45,9 +45,11 @@ export class UploadImageComponent implements OnInit {
   }
 
   public fileSelected(event: any): void {
-    const file = event.target.files.item(0);
-    if (file !== null) {
-      this.sampleService.uploadSampleImage(file).subscribe({
+    const file: File = event.target.files.item(0);
+    if (file !== null && this.sampleId !== undefined) {
+      const blob = file.slice(0, file.size, 'image/jpeg');
+      const modifiedFile = new File([blob], String(Date.now()) + '.jpeg', {type: file.type});
+      this.sampleService.uploadSampleImage(this.sampleId, modifiedFile).subscribe({
         next: (data: any) => {
           console.info(data);
           this.imageUploaded.emit();
@@ -58,7 +60,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   public captureImage(): void {
-    if (this.video !== null && this.captureCanvas !== null) {
+    if (this.video !== null && this.captureCanvas !== null && this.sampleId !== undefined) {
       const ctx = this.captureCanvas.getContext("2d");
       this.captureCanvas.width = this.videoCaptureWidth;
       this.captureCanvas.height = this.videoCaptureHeight;
@@ -72,7 +74,8 @@ export class UploadImageComponent implements OnInit {
           // @ts-ignore
           this.fileInput.files = dT.files;
           if (this.fileInput?.files) {
-            this.sampleService.uploadSampleImage(this.fileInput.files[0]).subscribe({
+            // @ts-ignore
+            this.sampleService.uploadSampleImage(this.sampleId, this.fileInput.files[0]).subscribe({
               next: (data: any) => {
                 console.info(data);
                 this.stopStream();

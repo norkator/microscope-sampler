@@ -1,7 +1,6 @@
 <h2 *ngIf="sample === null">No sample selected</h2>
 <h2 *ngIf="sample !== null">{{sample.name || 'New sample basic details'}}</h2>
 
-
 <div *ngIf="sample !== null" class="content-grid">
   <div class="grid-item">
     <div>
@@ -39,12 +38,12 @@
   </div>
 </div>
 
-
 <app-modal
   (modalClosedClick)="imageUploadModalOpen = !imageUploadModalOpen"
   [isOpen]="imageUploadModalOpen"
   title="Upload sample image">
   <app-upload-image
     [sampleId]="sample?.id"
+    (imageUploaded)="imageUploaded()"
   ></app-upload-image>
 </app-modal>

@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException, File, UploadFile
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+import shutil
+import os
 
 import models
 import schemas
@@ -10,6 +12,8 @@ from database import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+IMAGE_FOLDER = os.getcwd() + '/images/'
 
 origins = [
     "http://localhost:4200",
@@ -114,10 +118,14 @@ async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
 
 
 @app.post("/sample-image")
-async def create_upload_sample_image(file: UploadFile | None = None):
+async def create_upload_sample_image(request: Request, file: UploadFile | None = None):
     if not file:
         return {"message": "No upload file sent"}
     else:
-        return {"filename": file.filename}
+        sample_id = int(request.headers.get('sampleid'))
+        with open(IMAGE_FOLDER + file.filename, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        return {"sampleId": sample_id, "filename": file.filename}
 
 # --------------------------------------------

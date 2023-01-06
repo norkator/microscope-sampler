@@ -13,26 +13,37 @@ export class CameraImageComponent implements OnInit {
     video: true
   };
 
+  private video: HTMLVideoElement | null = null;
+  private canvas: HTMLCanvasElement | null = null;
+
   public cameraRunning: boolean = false;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.video = document.querySelector('video');
+    this.canvas = document.querySelector('canvas');
   }
 
   public captureImage(): void {
+    if (this.canvas !== null && this.video !== null) {
+      const context = this.canvas.getContext('2d');
+      if (context !== null) {
+        context.drawImage(this.video, 0, 0, 1280, 720);
+        this.stopStream();
+      }
+    }
   }
 
   private handleSuccess(stream: any) {
-    const video = document.querySelector('video');
     const videoTracks = stream.getVideoTracks();
     console.log('Got stream with constraints:', this.constraints);
     console.log(`Using video device: ${videoTracks[0].label}`);
     // @ts-ignore
     window.stream = stream;
     // @ts-ignore
-    video.srcObject = stream;
+    this.video.srcObject = stream;
   }
 
   handleError(error: any) {
@@ -60,6 +71,14 @@ export class CameraImageComponent implements OnInit {
     } catch (e) {
       this.handleError(e);
     }
+  }
+
+  private stopStream(): void {
+    // @ts-ignore
+    window.stream = null;
+    // @ts-ignore
+    this.video.srcObject = null;
+    this.cameraRunning = false;
   }
 
 }

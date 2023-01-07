@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, Request
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import shutil
@@ -118,7 +119,7 @@ async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
 
 
 @app.post("/sample-image")
-async def create_upload_sample_image(request: Request, db: Session = Depends(get_db), file: UploadFile | None = None):
+async def upload_sample_image(request: Request, db: Session = Depends(get_db), file: UploadFile | None = None):
     if not file:
         raise HTTPException(status_code=400, detail="No upload file sent")
     else:
@@ -130,5 +131,15 @@ async def create_upload_sample_image(request: Request, db: Session = Depends(get
             return {"sampleId": sample_id, "filename": file.filename}
         else:
             raise HTTPException(status_code=400, detail="Inserting db image row failed")
+
+
+@app.get("/sample-images/{sample_id}", response_model=list[schemas.Image])
+async def get_sample_images(sample_id: int, db: Session = Depends(get_db)):
+    return crud.get_images(db, sample_id)
+
+
+@app.get("/sample-image/{file_name}")
+async def get_sample_image_data(file_name: str):
+    return FileResponse(path=IMAGE_FOLDER + file_name, filename=file_name, media_type='image/jpeg')
 
 # --------------------------------------------

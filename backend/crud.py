@@ -100,3 +100,7 @@ def create_image(db: Session, filename: str, sample_id: int):
     db.commit()
     db.refresh(db_image)
     return db_image
+
+
+def get_images(db: Session, sample_id: int):
+    return db.query(models.Image).filter(models.Image.sample_id == sample_id).all()

@@ -87,3 +87,16 @@ def update_sample(db: Session, sample: schemas.Sample, db_sample: schemas.Sample
     db.commit()
     db.refresh(db_sample)
     return db_sample
+
+
+# --------------------------------------------
+
+def create_image(db: Session, filename: str, sample_id: int):
+    db_image = models.Image(
+        file_name=filename,
+        sample_id=sample_id,
+    )
+    db.add(db_image)
+    db.commit()
+    db.refresh(db_image)
+    return db_image

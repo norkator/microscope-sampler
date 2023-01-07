@@ -67,3 +67,24 @@ class SampleGroup(SampleGroupBase):
 
     class Config:
         orm_mode = True
+
+
+# --------------------------------------------
+
+class ImageBase(BaseModel):
+    file_name: str
+    sample_id: int
+
+
+class ImageCreate(ImageBase):
+    file_name: str
+    sample_id: int
+
+
+class Image(ImageBase):
+    id: int
+    file_name: str
+    sample_id: int
+
+    class Config:
+        orm_mode = True

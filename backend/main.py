@@ -118,14 +118,17 @@ async def update_sample(sample: schemas.Sample, db: Session = Depends(get_db)):
 
 
 @app.post("/sample-image")
-async def create_upload_sample_image(request: Request, file: UploadFile | None = None):
+async def create_upload_sample_image(request: Request, db: Session = Depends(get_db), file: UploadFile | None = None):
     if not file:
-        return {"message": "No upload file sent"}
+        raise HTTPException(status_code=400, detail="No upload file sent")
     else:
         sample_id = int(request.headers.get('sampleid'))
-        with open(IMAGE_FOLDER + file.filename, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        return {"sampleId": sample_id, "filename": file.filename}
+        db_image = crud.create_image(db, file.filename, sample_id)
+        if db_image.id:
+            with open(IMAGE_FOLDER + file.filename, "wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
+            return {"sampleId": sample_id, "filename": file.filename}
+        else:
+            raise HTTPException(status_code=400, detail="Inserting db image row failed")
 
 # --------------------------------------------

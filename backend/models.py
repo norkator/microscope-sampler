@@ -28,3 +28,11 @@ class Sample(Base):
     date_time = Column(DateTime, index=False)
     description = Column(String, index=True)
     sample_group_id = Column(Integer, ForeignKey("sample_group.id"))
+
+
+class Image(Base):
+    __tablename__ = "image"
+
+    id = Column(Integer, primary_key=True, index=True)
+    file_name = Column(String, index=False)
+    sample_id = Column(Integer, ForeignKey("sample.id"), index=True)

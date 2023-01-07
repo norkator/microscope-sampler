@@ -87,7 +87,7 @@ export class UploadImageComponent implements OnInit {
         }
       });
     } else {
-      console.error('video, captureCanvas ir fileInput is null');
+      console.error('video, captureCanvas or fileInput is null');
     }
   }
 

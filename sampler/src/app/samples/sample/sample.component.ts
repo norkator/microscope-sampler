@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import {SampleInterface} from "../../interfaces";
+import {SampleImageInterface, SampleInterface} from "../../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleService} from "../sample.service";
 
@@ -37,6 +37,7 @@ export class SampleComponent implements OnInit {
       this.sampleFormGroup.controls['date_time'].setValue(
         this.getFormattedDate(new Date(Date.parse(this.sample.date_time)))
       );
+      this.getSampleImages();
     }
   }
 
@@ -76,7 +77,28 @@ export class SampleComponent implements OnInit {
   }
 
   public imageUploaded(): void {
-    this.imageUploadModalOpen = false;
+  }
+
+  private getSampleImages(): void {
+    if (this.sample !== null) {
+      this.sampleService.getSampleImages(this.sample.id).subscribe({
+        next: (data: SampleImageInterface[]) => {
+          this.getSampleImageData(data);
+        },
+        error: (error: any) => console.error(error)
+      });
+    }
+  }
+
+  private getSampleImageData(sampleImages: SampleImageInterface[]): void {
+    sampleImages.forEach((sampleImage: SampleImageInterface) => {
+      this.sampleService.getSampleImageData(sampleImage.file_name).subscribe({
+        next: (data: any) => {
+          console.info(data);
+        },
+        error: (error: any) => console.error(error)
+      });
+    });
   }
 
 }

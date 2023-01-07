@@ -52,4 +52,12 @@ export class SampleService {
     return this.http.post(environment.api + '/sample-image', formData, {headers});
   }
 
+  getSampleImages(sampleId: number): Observable<any> {
+    return this.http.get(environment.api + '/sample-images/' + sampleId, ConstantsModule.httpOptions);
+  }
+
+  getSampleImageData(fileName: string): Observable<any> {
+    return this.http.get(environment.api + '/sample-image/' + fileName, ConstantsModule.httpOptions);
+  }
+
 }

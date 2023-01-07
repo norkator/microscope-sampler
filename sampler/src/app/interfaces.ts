@@ -18,3 +18,10 @@ export interface SampleInterface {
   description: string | null;
   sample_group_id: number;
 }
+
+
+export interface SampleImageInterface {
+  id: number;
+  file_name: string;
+  sample_id: number;
+}

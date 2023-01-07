@@ -43,6 +43,7 @@
   [isOpen]="imageUploadModalOpen"
   title="Upload sample image">
   <app-upload-image
+    *ngIf="imageUploadModalOpen"
     [sampleId]="sample?.id"
     (imageUploaded)="imageUploaded()"
   ></app-upload-image>

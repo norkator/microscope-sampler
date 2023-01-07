@@ -60,7 +60,9 @@ export class SamplesComponent implements OnInit {
   }
 
   public sampleUpdated(sample: SampleInterface): void {
-    // Todo update sample array
+    if (this.sampleGroup !== null) {
+      this.getSamples(this.sampleGroup?.id);
+    }
   }
 
 }

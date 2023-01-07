@@ -15,6 +15,7 @@ export class SampleComponent implements OnInit {
   @Output() public sampleCreated = new EventEmitter();
   @Output() public sampleUpdated = new EventEmitter();
 
+  public sampleDetailsModalOpen: boolean = false;
   public imageUploadModalOpen: boolean = false;
   public sampleFormGroup!: FormGroup;
   public sampleImages: SampleImageInterface[] = [];
@@ -64,6 +65,7 @@ export class SampleComponent implements OnInit {
           next: (data: SampleInterface) => {
             this.sample = data;
             this.sampleUpdated.emit(this.sample);
+            this.sampleDetailsModalOpen = false;
           },
           error: (error: any) => console.error(error)
         });
@@ -76,6 +78,7 @@ export class SampleComponent implements OnInit {
           next: (data: SampleInterface) => {
             this.sample = data;
             this.sampleCreated.emit(this.sample);
+            this.sampleDetailsModalOpen = false;
           },
           error: (error: any) => console.error(error)
         });

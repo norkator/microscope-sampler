@@ -1,44 +1,34 @@
 <h2 *ngIf="sample === null">No sample selected</h2>
 <h2 *ngIf="sample !== null">{{sample.name || 'New sample basic details'}}</h2>
+<h3 *ngIf="sample !== null">Sample date: {{sample.date_time | date: 'dd/MM/yyyy HH:mm'}}</h3>
 
-<div *ngIf="sample !== null" class="content-grid">
-  <div class="grid-item">
-    <div>
-      <p>Sample basic details</p>
-      <div class="input-form-container">
-        <form [formGroup]="sampleFormGroup" (ngSubmit)="saveSample()">
-          <label for="sampleName">Sample name</label>
-          <input formControlName="name" type="text" id="sampleName" name="sample_name"
-                 placeholder="Sample name">
+<div>
+  <app-board-button
+    size="small"
+    [isAddBtn]="true" title="Define sample details"
+    [isSelected]="false"
+    (click)="sampleDetailsModalOpen = !sampleDetailsModalOpen"
+  ></app-board-button>
+</div>
 
-          <label for="sampleDatetime">Sample date and time</label>
-          <input formControlName="date_time" type="datetime-local" id="sampleDatetime" name="sample_date_time"
-                 placeholder="Sample date and time">
-
-          <input type="submit" value="Save"
-                 [disabled]="!sampleFormGroup.valid">
-        </form>
-      </div>
-    </div>
+<div *ngIf="sample !== null">
+  <h3 *ngIf="!sample.id || sample.id === 0">
+    You need to define and save new sample basic details before you can add images
+  </h3>
+  <div *ngIf="sample.id && sample.id > 0" class="flex-container">
+    <app-sample-image
+      *ngFor="let sampleImage of sampleImages"
+      [id]="sampleImage.id"
+      [image]="sampleImage"
+    ></app-sample-image>
+    <app-board-button
+      size="small"
+      [isAddBtn]="true" title="Upload image"
+      [isSelected]="false"
+      (click)="imageUploadModalOpen = !imageUploadModalOpen"
+    ></app-board-button>
   </div>
-  <div class="grid-item">
-    <h3 *ngIf="!sample.id || sample.id === 0">
-      You need to define and save new sample basic details before you can add images
-    </h3>
-    <div *ngIf="sample.id && sample.id > 0" class="flex-container">
-      <app-sample-image
-        *ngFor="let sampleImage of sampleImages"
-        [id]="sampleImage.id"
-        [image]="sampleImage"
-      ></app-sample-image>
-      <app-board-button
-        size="small"
-        [isAddBtn]="true" title="Upload image"
-        [isSelected]="false"
-        (click)="imageUploadModalOpen = !imageUploadModalOpen"
-      ></app-board-button>
-    </div>
-  </div>
+
 </div>
 
 <app-modal
@@ -50,4 +40,26 @@
     [sampleId]="sample?.id"
     (imageUploaded)="imageUploaded()"
   ></app-upload-image>
+</app-modal>
+
+<app-modal
+  (modalClosedClick)="sampleDetailsModalOpen = !sampleDetailsModalOpen"
+  [isOpen]="sampleDetailsModalOpen"
+  title="Sample basic details">
+  <div>
+    <div class="input-form-container">
+      <form [formGroup]="sampleFormGroup" (ngSubmit)="saveSample()">
+        <label for="sampleName">Sample name</label>
+        <input formControlName="name" type="text" id="sampleName" name="sample_name"
+               placeholder="Sample name">
+
+        <label for="sampleDatetime">Sample date and time</label>
+        <input formControlName="date_time" type="datetime-local" id="sampleDatetime" name="sample_date_time"
+               placeholder="Sample date and time">
+
+        <input type="submit" value="Save"
+               [disabled]="!sampleFormGroup.valid">
+      </form>
+    </div>
+  </div>
 </app-modal>

@@ -1,1 +1,3 @@
-<p>...</p>
+<div>
+  <img *ngIf="image !== null" [src]="image.imageData | SafeImage" width=400 height="200" [alt]="image.file_name">
+</div>

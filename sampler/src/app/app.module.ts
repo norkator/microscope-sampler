@@ -7,6 +7,7 @@ import {BoardButtonComponent} from './ui-components/board-button/board-button.co
 import {SampleImageComponent} from './ui-components/sample-image/sample-image.component';
 import {UploadImageComponent} from "./ui-components/upload-image/upload-image.component";
 import {ModalComponent} from './ui-components/modal/modal.component';
+import {SafeImage} from "./ui-components/sample-image/safe-image";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CategoryMenuComponent} from "./category-menu/category-menu.component";
@@ -25,6 +26,7 @@ import {SamplesComponent} from './samples/samples.component';
     SamplesComponent,
     SampleImageComponent,
     UploadImageComponent,
+    SafeImage,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import {SamplesComponent} from './samples/samples.component';
   ],
   providers: [
     FormBuilder,
+    SafeImage,
   ],
   bootstrap: [AppComponent]
 })

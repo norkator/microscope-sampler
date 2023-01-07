@@ -57,7 +57,10 @@ export class SampleService {
   }
 
   getSampleImageData(fileName: string): Observable<any> {
-    return this.http.get(environment.api + '/sample-image/' + fileName, ConstantsModule.httpOptions);
+    const headers = new HttpHeaders({
+      'Accept': 'image/jpeg',
+    });
+    return this.http.get(environment.api + '/sample-image/' + fileName, {headers, responseType: 'blob'});
   }
 
 }

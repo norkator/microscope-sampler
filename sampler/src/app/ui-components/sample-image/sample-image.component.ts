@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SampleImageInterface} from "../../interfaces";
 
 @Component({
   selector: 'app-sample-image',
@@ -6,6 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sample-image.component.scss']
 })
 export class SampleImageComponent implements OnInit {
+  @Input() public image: SampleImageInterface | null = null;
 
   constructor() {
   }

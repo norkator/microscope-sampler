@@ -17,6 +17,9 @@ export class SampleComponent implements OnInit {
 
   public imageUploadModalOpen: boolean = false;
   public sampleFormGroup!: FormGroup;
+  public sampleImages: SampleImageInterface[] = [];
+  public imagesCount: number = 0;
+  public loadedImagesCount: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,6 +40,10 @@ export class SampleComponent implements OnInit {
       this.sampleFormGroup.controls['date_time'].setValue(
         this.getFormattedDate(new Date(Date.parse(this.sample.date_time)))
       );
+
+      this.sampleImages = [];
+      this.imagesCount = 0;
+      this.loadedImagesCount = 0;
       this.getSampleImages();
     }
   }
@@ -91,10 +98,16 @@ export class SampleComponent implements OnInit {
   }
 
   private getSampleImageData(sampleImages: SampleImageInterface[]): void {
+    this.imagesCount = sampleImages.length;
     sampleImages.forEach((sampleImage: SampleImageInterface) => {
       this.sampleService.getSampleImageData(sampleImage.file_name).subscribe({
         next: (data: any) => {
-          console.info(data);
+          const image: SampleImageInterface = sampleImage;
+          image.imageData = URL.createObjectURL(data);
+          this.sampleImages.push(image);
+          this.loadedImagesCount++;
+          if (this.loadedImagesCount === this.imagesCount) {
+          }
         },
         error: (error: any) => console.error(error)
       });

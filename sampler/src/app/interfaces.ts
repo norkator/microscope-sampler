@@ -24,4 +24,5 @@ export interface SampleImageInterface {
   id: number;
   file_name: string;
   sample_id: number;
+  imageData?: any;
 }

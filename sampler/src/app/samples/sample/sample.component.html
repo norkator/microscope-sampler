@@ -26,13 +26,11 @@
       You need to define and save new sample basic details before you can add images
     </h3>
     <div *ngIf="sample.id && sample.id > 0" class="flex-container">
-      <div *ngIf="loadedImagesCount === imagesCount">
-        <app-sample-image
-          *ngFor="let sampleImage of sampleImages"
-          [id]="sampleImage.id"
-          [image]="sampleImage"
-        ></app-sample-image>
-      </div>
+      <app-sample-image
+        *ngFor="let sampleImage of sampleImages"
+        [id]="sampleImage.id"
+        [image]="sampleImage"
+      ></app-sample-image>
       <app-board-button
         size="small"
         [isAddBtn]="true" title="Upload image"

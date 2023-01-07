@@ -1,0 +1,15 @@
+.sample-image {
+  border-style: solid;
+  border-radius: 25px;
+  border-color: rgb(161, 161, 161);
+  border-width: 2px;
+  width: 250px;
+  height: 150px;
+  margin: 5px;
+}
+
+.sample-image:hover {
+  cursor: pointer;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}

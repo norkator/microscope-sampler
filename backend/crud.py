@@ -102,5 +102,14 @@ def create_image(db: Session, filename: str, sample_id: int):
     return db_image
 
 
+def get_image(db: Session, image_id: int):
+    return db.query(models.Image).filter(models.Image.id == image_id).first()
+
+
 def get_images(db: Session, sample_id: int):
     return db.query(models.Image).filter(models.Image.sample_id == sample_id).all()
+
+
+def delete_image(db: Session, db_image: models.Image):
+    db.delete(db_image)
+    db.commit()

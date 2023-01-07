@@ -142,4 +142,15 @@ async def get_sample_images(sample_id: int, db: Session = Depends(get_db)):
 async def get_sample_image_data(file_name: str):
     return FileResponse(path=IMAGE_FOLDER + file_name, filename=file_name, media_type='image/jpeg')
 
+
+@app.delete("/sample-image/{image_id}")
+async def delete_sample_image(image_id: int, db: Session = Depends(get_db)):
+    db_image = crud.get_image(db=db, image_id=image_id)
+    if not db_image:
+        raise HTTPException(status_code=400, detail="Image not found with id")
+    else:
+        os.remove(IMAGE_FOLDER + db_image.file_name)
+        crud.delete_image(db=db, db_image=db_image)
+        return {"removed": True}
+
 # --------------------------------------------

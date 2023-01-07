@@ -9,6 +9,8 @@ import {SampleImageInterface} from "../../interfaces";
 export class SampleImageComponent implements OnInit {
   @Input() public image: SampleImageInterface | null = null;
 
+  public imageViewModalOpen: boolean = false;
+
   constructor() {
   }
 

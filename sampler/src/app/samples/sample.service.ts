@@ -63,4 +63,8 @@ export class SampleService {
     return this.http.get(environment.api + '/sample-image/' + fileName, {headers, responseType: 'blob'});
   }
 
+  deleteSampleImage(imageId: number): Observable<any> {
+    return this.http.delete(environment.api + '/sample-image/' + imageId, ConstantsModule.httpOptions);
+  }
+
 }

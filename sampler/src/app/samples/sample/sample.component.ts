@@ -117,4 +117,15 @@ export class SampleComponent implements OnInit {
     });
   }
 
+  public deleteImage(sampleImage: SampleImageInterface): void {
+    this.sampleService.deleteSampleImage(sampleImage.id).subscribe({
+      next: () => {
+        this.sampleImages = this.sampleImages.filter((s: SampleImageInterface) => {
+          return s.id !== sampleImage.id;
+        });
+      },
+      error: (error: any) => console.error(error)
+    });
+  }
+
 }

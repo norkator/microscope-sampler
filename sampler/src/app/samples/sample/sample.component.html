@@ -20,6 +20,7 @@
       *ngFor="let sampleImage of sampleImages"
       [id]="sampleImage.id"
       [image]="sampleImage"
+      (deleteImageClick)="deleteImage(sampleImage)"
     ></app-sample-image>
     <app-board-button
       size="small"

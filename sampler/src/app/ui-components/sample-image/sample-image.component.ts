@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SampleImageInterface} from "../../interfaces";
 
 @Component({
@@ -8,6 +8,7 @@ import {SampleImageInterface} from "../../interfaces";
 })
 export class SampleImageComponent implements OnInit {
   @Input() public image: SampleImageInterface | null = null;
+  @Output() public deleteImageClick = new EventEmitter();
 
   public imageViewModalOpen: boolean = false;
 
@@ -15,6 +16,11 @@ export class SampleImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public deleteImage(): void {
+    this.deleteImageClick.emit();
+    this.imageViewModalOpen = false;
   }
 
 }

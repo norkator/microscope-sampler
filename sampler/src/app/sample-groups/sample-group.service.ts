@@ -22,10 +22,15 @@ export class SampleGroupService {
     return this.http.get(environment.api + '/sample-groups/' + categoryId, ConstantsModule.httpOptions);
   }
 
-  createSampleGroup(name: string, categoryId: number): Observable<any> {
+  createSampleGroup(
+    name: string, categoryId: number, centrifugeMinutes: number, centrifugeRpm: number, centrifugeRcf: number
+  ): Observable<any> {
     return this.http.post(environment.api + '/sample-group', {
       name: name,
       category_id: categoryId,
+      centrifuge_minutes: centrifugeMinutes,
+      centrifuge_rpm: centrifugeRpm,
+      centrifuge_rcf: centrifugeRcf,
     }, ConstantsModule.httpOptions);
   }
 

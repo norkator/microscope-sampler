@@ -26,9 +26,23 @@
         <label for="sampleGroupName">New sample group name</label>
         <input formControlName="name" type="text" id="sampleGroupName" name="sample_group_name"
                placeholder="New sample group name">
-
         <p>Will be created under category: {{category?.name}}</p>
         <br>
+
+        <img src="./assets/centrifuge.svg" alt="centrifuge" width="100" height="100"/>
+        <br>
+        <br>
+        <label for="centrifuge_minutes">Centrifugation minutes</label>
+        <input formControlName="centrifuge_minutes" type="text" id="centrifuge_minutes" name="centrifuge_minutes"
+               placeholder="Centrifugation minutes">
+        <label for="centrifuge_rpm">Centrifugation RPM (rounds per minute)</label>
+        <input formControlName="centrifuge_rpm" type="text" id="centrifuge_rpm" name="centrifuge_rpm"
+               placeholder="RPM">
+        <label for="centrifuge_rcf">Centrifugation relative centrifugal force</label>
+        <input formControlName="centrifuge_rcf" type="text" id="centrifuge_rcf" name="centrifuge_rcf"
+               placeholder="RCF">
+        <br>
+
         <input type="submit" value="Create"
                [disabled]="!sampleGroupFormGroup.valid || sampleGroupFormGroup.controls['category_id'].value === 0">
       </form>

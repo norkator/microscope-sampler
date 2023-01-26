@@ -35,6 +35,9 @@ export class SampleGroupsComponent implements OnInit {
     this.sampleGroupFormGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       category_id: [0, [Validators.required]],
+      centrifuge_minutes: [0, [Validators.required]],
+      centrifuge_rpm: [0, [Validators.required]],
+      centrifuge_rcf: [0, [Validators.required]],
     });
   }
 
@@ -72,6 +75,9 @@ export class SampleGroupsComponent implements OnInit {
       this.sampleGroupService.createSampleGroup(
         this.sampleGroupFormGroup.controls['name'].value,
         this.sampleGroupFormGroup.controls['category_id'].value,
+        this.sampleGroupFormGroup.controls['centrifuge_minutes'].value,
+        this.sampleGroupFormGroup.controls['centrifuge_rpm'].value,
+        this.sampleGroupFormGroup.controls['centrifuge_rcf'].value,
       ).subscribe({
         next: (data: SampleGroupInterface) => {
           this.sampleGroups.push(data);

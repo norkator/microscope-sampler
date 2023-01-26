@@ -9,6 +9,9 @@ export interface SampleGroupInterface {
   description: string;
   category_id: number;
   category?: CategoryInterface;
+  centrifuge_minutes: number;
+  centrifuge_rpm: number;
+  centrifuge_rcf: number;
 }
 
 export interface SampleInterface {

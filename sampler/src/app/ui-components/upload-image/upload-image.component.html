@@ -1,33 +1,35 @@
-<h4>Either upload image manually</h4>
-<div class="form-group">
-  <label for="fileInput">Choose File</label>
-  <input type="file" id="fileInput" #fileInput
-         (change)="fileSelected($event)">
-</div>
-
-<hr>
-
-<h4>or by capturing from camera</h4>
-<div class="sample-camera-container">
-  <div class="camera-control-btn">
-    <app-board-button
-      *ngIf="!cameraRunning"
-      size="small"
-      [isAddBtn]="true" title="Start camera"
-      [isSelected]="false"
-      (click)="init($event)"
-    ></app-board-button>
+<div *ngIf="!uploaded">
+  <h4>Either upload image manually</h4>
+  <div class="form-group">
+    <label for="fileInput">Choose File</label>
+    <input type="file" id="fileInput" #fileInput
+           (change)="fileSelected($event)">
   </div>
-  <!-- <button id="showVideo" class="camera-control-btn" (click)="init($event)">Start camera</button> -->
-  <video #video class="sample-camera" autoplay="autoplay" id="cameraVideoElement"></video>
+
+  <hr>
+
+  <h4>or by capturing from camera</h4>
+  <div class="sample-camera-container">
+    <div class="camera-control-btn">
+      <app-board-button
+        *ngIf="!cameraRunning"
+        size="small"
+        [isAddBtn]="true" title="Start camera"
+        [isSelected]="false"
+        (click)="init($event)"
+      ></app-board-button>
+    </div>
+    <!-- <button id="showVideo" class="camera-control-btn" (click)="init($event)">Start camera</button> -->
+    <video #video class="sample-camera" autoplay="autoplay" id="cameraVideoElement"></video>
+  </div>
+  <app-board-button
+    size="small"
+    [isAddBtn]="true" title="Capture image"
+    [isSelected]="false"
+    (click)="captureImage()"
+  ></app-board-button>
+
+
+  <!-- holder for captured images from camera -->
+  <canvas #captureCanvas id="captureCanvas"></canvas>
 </div>
-<app-board-button
-  size="small"
-  [isAddBtn]="true" title="Capture image"
-  [isSelected]="false"
-  (click)="captureImage()"
-></app-board-button>
-
-
-<!-- holder for captured images from camera -->
-<canvas #captureCanvas id="captureCanvas"></canvas>

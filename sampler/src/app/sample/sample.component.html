@@ -37,15 +37,19 @@
 
 </div>
 
+
 <app-modal
   (modalClosedClick)="imageUploadModalOpen = !imageUploadModalOpen"
   [isOpen]="imageUploadModalOpen"
-  title="Upload sample image">
-  <app-upload-image
-    *ngIf="imageUploadModalOpen"
-    [sampleId]="sample?.id"
-    (imageUploaded)="imageUploaded()"
-  ></app-upload-image>
+  title="Upload sample image"
+  [bigModal]="true"
+>
+  <div *ngIf="imageUploadModalOpen">
+    <app-upload-image
+      [sampleId]="sample?.id"
+      (imageUploaded)="imageUploaded()"
+    ></app-upload-image>
+  </div>
 </app-modal>
 
 

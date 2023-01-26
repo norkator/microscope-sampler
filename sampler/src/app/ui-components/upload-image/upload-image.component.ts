@@ -19,6 +19,7 @@ export class UploadImageComponent implements OnInit {
   private video: HTMLVideoElement | null = null;
   private captureCanvas: HTMLCanvasElement | null = null;
   private fileInput: HTMLInputElement | null = null;
+  public uploaded: boolean = false;
   public cameraRunning: boolean = false;
   private videoCaptureWidth: number = 0;
   private videoCaptureHeight: number = 0;
@@ -27,21 +28,11 @@ export class UploadImageComponent implements OnInit {
   constructor(
     private sampleService: SampleService,
   ) {
+    this.uploaded = false;
   }
 
   ngOnInit(): void {
-    this.video = document.querySelector('video');
-    this.captureCanvas = document.getElementById('captureCanvas') as HTMLCanvasElement;
-    this.fileInput = document.getElementById('fileInput') as HTMLInputElement;
-
-    if (this.video !== null) {
-      const _this = this;
-      this.video.addEventListener('loadedmetadata', function (e) {
-        console.log(this.videoWidth, this.videoHeight);
-        _this.videoCaptureWidth = this.videoWidth;
-        _this.videoCaptureHeight = this.videoHeight;
-      }, false);
-    }
+    this.uploaded = false;
   }
 
   public fileSelected(event: any): void {
@@ -76,10 +67,8 @@ export class UploadImageComponent implements OnInit {
           if (this.fileInput?.files) {
             // @ts-ignore
             this.sampleService.uploadSampleImage(this.sampleId, this.fileInput.files[0]).subscribe({
-              next: (data: any) => {
-                console.info(data);
+              next: () => {
                 this.stopStream();
-                this.imageUploaded.emit();
               },
               error: (error: any) => console.error(error)
             });
@@ -118,6 +107,20 @@ export class UploadImageComponent implements OnInit {
   }
 
   public async init(e: any) {
+
+    this.video = document.querySelector('video');
+    this.captureCanvas = document.getElementById('captureCanvas') as HTMLCanvasElement;
+    this.fileInput = document.getElementById('fileInput') as HTMLInputElement;
+
+    if (this.video !== null) {
+      const _this = this;
+      this.video.addEventListener('loadedmetadata', function (e) {
+        console.log(this.videoWidth, this.videoHeight);
+        _this.videoCaptureWidth = this.videoWidth;
+        _this.videoCaptureHeight = this.videoHeight;
+      }, false);
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia(this.constraints);
       this.handleSuccess(stream);
@@ -134,6 +137,8 @@ export class UploadImageComponent implements OnInit {
     // @ts-ignore
     this.video.srcObject = null;
     this.cameraRunning = false;
+    this.uploaded = true;
+    this.imageUploaded.emit();
   }
 
 }

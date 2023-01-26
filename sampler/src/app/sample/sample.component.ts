@@ -91,6 +91,7 @@ export class SampleComponent implements OnInit {
   }
 
   public imageUploaded(): void {
+    this.imageUploadModalOpen = false;
     this.getSampleImages();
   }
 
@@ -98,6 +99,7 @@ export class SampleComponent implements OnInit {
     if (this.sample !== null) {
       this.sampleService.getSampleImages(this.sample.id).subscribe({
         next: (data: SampleImageInterface[]) => {
+          this.sampleImages = [];
           this.getSampleImageData(data);
         },
         error: (error: any) => console.error(error)

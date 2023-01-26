@@ -9,6 +9,7 @@ export class ModalComponent implements OnInit {
   @Output() public modalClosedClick = new EventEmitter();
   @Input() public isOpen: boolean = false;
   @Input() public title: string = '';
+  @Input() public bigModal: boolean = false;
 
 
   constructor() {

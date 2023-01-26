@@ -26,20 +26,36 @@ export class SampleService {
     return this.http.get(environment.api + '/samples/' + sampleGroupId, ConstantsModule.httpOptions);
   }
 
-  createSample(name: string, dateTime: string, sampleGroupId: number): Observable<any> {
+  createSample(
+    name: string, dateTime: string,
+    centrifugeMinutes: number, centrifugeRpm: number, centrifugeRcf: number, centrifugationCompleted: boolean,
+    sampleGroupId: number,
+  ): Observable<any> {
     return this.http.post(environment.api + '/sample', {
       name: name,
       date_time: dateTime,
       sample_group_id: sampleGroupId,
+      centrifuge_minutes: centrifugeMinutes,
+      centrifuge_rpm: centrifugeRpm,
+      centrifuge_rcf: centrifugeRcf,
+      centrifugation_completed: centrifugationCompleted,
     }, ConstantsModule.httpOptions);
   }
 
-  updateSample(id: number, name: string, dateTime: string, sampleGroupId: number): Observable<any> {
+  updateSample(
+    id: number, name: string, dateTime: string,
+    centrifugeMinutes: number, centrifugeRpm: number, centrifugeRcf: number, centrifugationCompleted: boolean,
+    sampleGroupId: number,
+  ): Observable<any> {
     return this.http.put(environment.api + '/sample', {
       id: id,
       name: name,
       date_time: dateTime,
       sample_group_id: sampleGroupId,
+      centrifuge_minutes: centrifugeMinutes,
+      centrifuge_rpm: centrifugeRpm,
+      centrifuge_rcf: centrifugeRcf,
+      centrifugation_completed: centrifugationCompleted,
     }, ConstantsModule.httpOptions);
   }
 

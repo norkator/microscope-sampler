@@ -1,4 +1,4 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SampleImageInterface, SampleInterface} from "../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleService} from "../samples/sample.service";
@@ -35,6 +35,10 @@ export class SampleComponent implements OnInit {
     this.sampleFormGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       date_time: [this.getFormattedDate(new Date()), [Validators.required]],
+      centrifuge_minutes: [this.sample?.centrifuge_minutes || 0, [Validators.required]],
+      centrifuge_rpm: [this.sample?.centrifuge_rpm || 0, [Validators.required]],
+      centrifuge_rcf: [this.sample?.centrifuge_rcf || 0, [Validators.required]],
+      centrifugation_completed: [false, []],
     });
   }
 
@@ -42,24 +46,22 @@ export class SampleComponent implements OnInit {
     this.sampleService.getSample(sampleId).subscribe({
       next: (data: SampleInterface) => {
         this.sample = data;
+        this.initSampleFormGroup();
         this.getSampleImages();
       },
       error: (error: any) => console.error(error)
     });
   }
 
-  ngOnChanges(changes: SimpleChanges | any) {
-    if (changes.sample && this.sample && this.sample.id > 0) {
-      this.sampleFormGroup.controls['name'].setValue(this.sample.name);
-      this.sampleFormGroup.controls['date_time'].setValue(
-        this.getFormattedDate(new Date(Date.parse(this.sample.date_time)))
-      );
-
-      this.sampleImages = [];
-      this.imagesCount = 0;
-      this.loadedImagesCount = 0;
-      this.getSampleImages();
-    }
+  private initSampleFormGroup(): void {
+    this.sampleFormGroup.controls['name'].setValue(this.sample?.name);
+    this.sampleFormGroup.controls['date_time'].setValue(
+      this.getFormattedDate(new Date(Date.parse(this.sample?.date_time || new Date().toISOString())))
+    );
+    this.sampleFormGroup.controls['centrifuge_minutes'].setValue(this.sample?.centrifuge_minutes);
+    this.sampleFormGroup.controls['centrifuge_rpm'].setValue(this.sample?.centrifuge_rpm);
+    this.sampleFormGroup.controls['centrifuge_rcf'].setValue(this.sample?.centrifuge_rcf);
+    this.sampleFormGroup.controls['centrifugation_completed'].setValue(this.sample?.centrifugation_completed);
   }
 
   private getFormattedDate(date: Date): string {
@@ -67,36 +69,25 @@ export class SampleComponent implements OnInit {
   }
 
   public saveSample(): void {
-    // if (this.sampleGroupId && this.sampleGroupId > 0) {
-    //   if (this.sample?.id) {
-    //     this.sampleService.updateSample(
-    //       this.sample.id,
-    //       this.sampleFormGroup.controls['name'].value,
-    //       this.sampleFormGroup.controls['date_time'].value,
-    //       this.sample.sample_group_id,
-    //     ).subscribe({
-    //       next: (data: SampleInterface) => {
-    //         this.sample = data;
-    //         this.sampleUpdated.emit(this.sample);
-    //         this.sampleDetailsModalOpen = false;
-    //       },
-    //       error: (error: any) => console.error(error)
-    //     });
-    //   } else {
-    //     this.sampleService.createSample(
-    //       this.sampleFormGroup.controls['name'].value,
-    //       this.sampleFormGroup.controls['date_time'].value,
-    //       this.sampleGroupId,
-    //     ).subscribe({
-    //       next: (data: SampleInterface) => {
-    //         this.sample = data;
-    //         this.sampleCreated.emit(this.sample);
-    //         this.sampleDetailsModalOpen = false;
-    //       },
-    //       error: (error: any) => console.error(error)
-    //     });
-    //   }
-    // }
+    if (this.sample !== null) {
+      this.sampleService.updateSample(
+        this.sample.id,
+        this.sampleFormGroup.controls['name'].value,
+        this.sampleFormGroup.controls['date_time'].value,
+        this.sampleFormGroup.controls['centrifuge_minutes'].value,
+        this.sampleFormGroup.controls['centrifuge_rpm'].value,
+        this.sampleFormGroup.controls['centrifuge_rcf'].value,
+        this.sampleFormGroup.controls['centrifugation_completed'].value,
+        this.sample.sample_group_id,
+      ).subscribe({
+        next: (data: SampleInterface) => {
+          this.sample = data;
+          this.sampleDetailsModalOpen = false;
+          this.initSampleFormGroup();
+        },
+        error: (error: any) => console.error(error)
+      });
+    }
   }
 
   public imageUploaded(): void {

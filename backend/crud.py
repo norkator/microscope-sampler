@@ -91,6 +91,10 @@ def create_sample(db: Session, sample: schemas.SampleCreate):
 def update_sample(db: Session, sample: schemas.Sample, db_sample: schemas.Sample):
     db_sample.name = sample.name
     db_sample.date_time = sample.date_time
+    db_sample.centrifuge_minutes = sample.centrifuge_minutes
+    db_sample.centrifuge_rpm = sample.centrifuge_rpm
+    db_sample.centrifuge_rcf = sample.centrifuge_rcf
+    db_sample.centrifugation_completed = sample.centrifugation_completed
     db.add(db_sample)
     db.commit()
     db.refresh(db_sample)

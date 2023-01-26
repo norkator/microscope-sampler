@@ -42,7 +42,10 @@ def get_sample_group_by_name(db: Session, name: str):
 
 def create_sample_group(db: Session, sample_group: schemas.SampleGroupCreate):
     db_sample_group = models.SampleGroup(
-        name=sample_group.name, category_id=sample_group.category_id
+        name=sample_group.name, category_id=sample_group.category_id,
+        centrifuge_minutes=sample_group.centrifuge_minutes,
+        centrifuge_rpm=sample_group.centrifuge_rpm,
+        centrifuge_rcf=sample_group.centrifuge_rcf
     )
     db.add(db_sample_group)
     db.commit()

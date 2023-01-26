@@ -32,6 +32,10 @@ class SampleCreate(SampleBase):
     name: str
     date_time: datetime
     sample_group_id: int
+    centrifuge_minutes: int
+    centrifuge_rpm: int
+    centrifuge_rcf: int
+    centrifugation_completed: bool
 
 
 class Sample(SampleBase):
@@ -40,6 +44,10 @@ class Sample(SampleBase):
     date_time: datetime
     description: str | None = None
     sample_group_id: int
+    centrifuge_minutes: int
+    centrifuge_rpm: int
+    centrifuge_rcf: int
+    centrifugation_completed: bool
 
     class Config:
         orm_mode = True
@@ -55,6 +63,9 @@ class SampleGroupBase(BaseModel):
 class SampleGroupCreate(SampleGroupBase):
     name: str
     category_id: int
+    centrifuge_minutes: int
+    centrifuge_rpm: int
+    centrifuge_rcf: int
 
 
 class SampleGroup(SampleGroupBase):
@@ -62,6 +73,9 @@ class SampleGroup(SampleGroupBase):
     name: str
     category_id: int
     category: Category
+    centrifuge_minutes: int
+    centrifuge_rpm: int
+    centrifuge_rcf: int
 
     # samples: list[Sample] = []
 

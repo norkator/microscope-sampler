@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Boolean
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -18,6 +18,9 @@ class SampleGroup(Base):
     name = Column(String, unique=True, index=True)
     category_id = Column(Integer, ForeignKey("sample_category.id"))
     category = relationship("Category")
+    centrifuge_minutes = Column(Integer)
+    centrifuge_rpm = Column(Integer)
+    centrifuge_rcf = Column(Integer)  # relative centrifugal force
 
 
 class Sample(Base):
@@ -28,6 +31,10 @@ class Sample(Base):
     date_time = Column(DateTime, index=False)
     description = Column(String, index=True)
     sample_group_id = Column(Integer, ForeignKey("sample_group.id"))
+    centrifuge_minutes = Column(Integer)
+    centrifuge_rpm = Column(Integer)
+    centrifuge_rcf = Column(Integer)  # relative centrifugal force
+    centrifugation_completed = Column(Boolean)
 
 
 class Image(Base):

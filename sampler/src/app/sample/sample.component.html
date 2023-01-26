@@ -42,25 +42,3 @@
     (imageUploaded)="imageUploaded()"
   ></app-upload-image>
 </app-modal>
-
-<app-modal
-  (modalClosedClick)="sampleDetailsModalOpen = !sampleDetailsModalOpen"
-  [isOpen]="sampleDetailsModalOpen"
-  title="Sample basic details">
-  <div>
-    <div class="input-form-container">
-      <form [formGroup]="sampleFormGroup" (ngSubmit)="saveSample()">
-        <label for="sampleName">Sample name</label>
-        <input formControlName="name" type="text" id="sampleName" name="sample_name"
-               placeholder="Sample name">
-
-        <label for="sampleDatetime">Sample date and time</label>
-        <input formControlName="date_time" type="datetime-local" id="sampleDatetime" name="sample_date_time"
-               placeholder="Sample date and time">
-
-        <input type="submit" value="Save"
-               [disabled]="!sampleFormGroup.valid">
-      </form>
-    </div>
-  </div>
-</app-modal>

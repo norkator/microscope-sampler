@@ -20,6 +20,10 @@ export interface SampleInterface {
   date_time: string;
   description: string | null;
   sample_group_id: number;
+  centrifuge_minutes: number;
+  centrifuge_rpm: number;
+  centrifuge_rcf: number;
+  centrifugation_completed: boolean;
 }
 
 

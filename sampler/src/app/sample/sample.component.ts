@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {SampleImageInterface, SampleInterface} from "../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SampleService} from "../samples/sample.service";
+import {Location} from '@angular/common';
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-sample',
@@ -11,10 +13,6 @@ import {SampleService} from "../samples/sample.service";
 export class SampleComponent implements OnInit {
 
   public sample: SampleInterface | null = null;
-  public sampleGroupId: number | undefined;
-  public sampleCreated = new EventEmitter();
-  public sampleUpdated = new EventEmitter();
-
   public sampleDetailsModalOpen: boolean = false;
   public imageUploadModalOpen: boolean = false;
   public sampleFormGroup!: FormGroup;
@@ -23,15 +21,30 @@ export class SampleComponent implements OnInit {
   public loadedImagesCount: number = 0;
 
   constructor(
+    private location: Location,
     private formBuilder: FormBuilder,
     private sampleService: SampleService,
+    private route: ActivatedRoute,
   ) {
+    this.route.queryParams.subscribe((params: Params | { sample_group_id: number, sample_id: number }) => {
+      this.getSample(params.sample_id);
+    });
   }
 
   ngOnInit(): void {
     this.sampleFormGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       date_time: [this.getFormattedDate(new Date()), [Validators.required]],
+    });
+  }
+
+  private getSample(sampleId: number): void {
+    this.sampleService.getSample(sampleId).subscribe({
+      next: (data: SampleInterface) => {
+        this.sample = data;
+        this.getSampleImages();
+      },
+      error: (error: any) => console.error(error)
     });
   }
 
@@ -87,6 +100,7 @@ export class SampleComponent implements OnInit {
   }
 
   public imageUploaded(): void {
+    this.getSampleImages();
   }
 
   private getSampleImages(): void {
@@ -126,6 +140,10 @@ export class SampleComponent implements OnInit {
       },
       error: (error: any) => console.error(error)
     });
+  }
+
+  public return() {
+    this.location.back();
   }
 
 }

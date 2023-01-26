@@ -1,11 +1,15 @@
-<h2 *ngIf="sample === null">No sample selected</h2>
-<h2 *ngIf="sample !== null">{{sample.name || 'New sample basic details'}}</h2>
+<button (click)="return()">Return</button>
+
+<h2 *ngIf="sample === null">Sample not loaded</h2>
+<h2 *ngIf="sample !== null">{{sample.name || 'Sample has no name'}}</h2>
 <h3 *ngIf="sample !== null">Sample date: {{sample.date_time | date: 'dd/MM/yyyy HH:mm'}}</h3>
+<p *ngIf="sample !== null">Centrifugation completed: <b>{{sample.centrifugation_completed ? 'yes' : 'no'}}</b></p>
+<p *ngIf="sample !== null">Centrifuge settings: {{sample.centrifuge_minutes}} minutes / {{sample.centrifuge_rpm}} RPM / {{sample.centrifuge_rcf}} RCF</p>
 
 <div>
   <app-board-button
     size="small"
-    [isAddBtn]="true" title="Define sample details"
+    [isAddBtn]="true" title="Edit sample details"
     [isSelected]="false"
     (click)="sampleDetailsModalOpen = !sampleDetailsModalOpen"
   ></app-board-button>

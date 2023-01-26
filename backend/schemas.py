@@ -58,6 +58,9 @@ class Sample(SampleBase):
 class SampleGroupBase(BaseModel):
     name: str
     category_id: int
+    centrifuge_minutes: int
+    centrifuge_rpm: int
+    centrifuge_rcf: int
 
 
 class SampleGroupCreate(SampleGroupBase):

@@ -76,6 +76,11 @@ def create_sample(db: Session, sample: schemas.SampleCreate):
         date_time=sample.date_time,
         # description=, // todo implement later
         sample_group_id=sample.sample_group_id,
+        centrifuge_minutes=sample.centrifuge_minutes,
+        centrifuge_rpm=sample.centrifuge_rpm,
+        centrifuge_rcf=sample.centrifuge_rcf,
+        centrifugation_completed=sample.centrifugation_completed
+
     )
     db.add(db_sample)
     db.commit()

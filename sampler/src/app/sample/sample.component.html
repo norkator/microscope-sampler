@@ -4,7 +4,8 @@
 <h2 *ngIf="sample !== null">{{sample.name || 'Sample has no name'}}</h2>
 <h3 *ngIf="sample !== null">Sample date: {{sample.date_time | date: 'dd/MM/yyyy HH:mm'}}</h3>
 <p *ngIf="sample !== null">Centrifugation completed: <b>{{sample.centrifugation_completed ? 'yes' : 'no'}}</b></p>
-<p *ngIf="sample !== null">Centrifuge settings: {{sample.centrifuge_minutes}} minutes / {{sample.centrifuge_rpm}} RPM / {{sample.centrifuge_rcf}} RCF</p>
+<p *ngIf="sample !== null">Centrifuge settings: {{sample.centrifuge_minutes}} minutes / {{sample.centrifuge_rpm}} RPM
+  / {{sample.centrifuge_rcf}} RCF</p>
 
 <div>
   <app-board-button
@@ -45,4 +46,48 @@
     [sampleId]="sample?.id"
     (imageUploaded)="imageUploaded()"
   ></app-upload-image>
+</app-modal>
+
+
+<app-modal
+  (modalClosedClick)="sampleDetailsModalOpen = !sampleDetailsModalOpen"
+  [isOpen]="sampleDetailsModalOpen"
+  title="Sample basic details">
+  <div>
+    <div class="input-form-container">
+      <form [formGroup]="sampleFormGroup" (ngSubmit)="saveSample()">
+        <label for="sampleName">Sample name</label>
+        <input formControlName="name" type="text" id="sampleName" name="sample_name"
+               placeholder="Sample name">
+        <label for="sampleDatetime">Sample date and time</label>
+        <input formControlName="date_time" type="datetime-local" id="sampleDatetime" name="sample_date_time"
+               placeholder="Sample date and time">
+        <br>
+
+        <img class="centrifuge-image" src="./assets/centrifuge.svg" alt="centrifuge" width="100" height="100"/>
+        <br>
+        <br>
+        <label for="centrifuge_minutes">Centrifugation minutes</label>
+        <input formControlName="centrifuge_minutes" type="number" id="centrifuge_minutes" name="centrifuge_minutes"
+               placeholder="Centrifugation minutes">
+        <label for="centrifuge_rpm">Centrifugation RPM (rounds per minute)</label>
+        <input formControlName="centrifuge_rpm" type="number" id="centrifuge_rpm" name="centrifuge_rpm"
+               placeholder="RPM">
+        <label for="centrifuge_rcf">Centrifugation relative centrifugal force</label>
+        <input formControlName="centrifuge_rcf" type="number" id="centrifuge_rcf" name="centrifuge_rcf"
+               placeholder="RCF">
+        <label class="checkbox-container" for="centrifugation_completed">Centrifugation completed
+          <input formControlName="centrifugation_completed" type="checkbox" id="centrifugation_completed"
+                 name="centrifugation_completed"
+                 placeholder="RCF">
+          <span class="checkmark"></span>
+        </label>
+        <br>
+
+        <br>
+        <input type="submit" value="Save"
+               [disabled]="!sampleFormGroup.valid">
+      </form>
+    </div>
+  </div>
 </app-modal>

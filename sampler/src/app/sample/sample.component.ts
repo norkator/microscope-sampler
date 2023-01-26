@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import {SampleImageInterface, SampleInterface} from "../../interfaces";
+import {SampleImageInterface, SampleInterface} from "../interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SampleService} from "../sample.service";
+import {SampleService} from "../samples/sample.service";
 
 @Component({
   selector: 'app-sample',
@@ -10,10 +10,10 @@ import {SampleService} from "../sample.service";
 })
 export class SampleComponent implements OnInit {
 
-  @Input() public sample: SampleInterface | null = null;
-  @Input() public sampleGroupId: number | undefined;
-  @Output() public sampleCreated = new EventEmitter();
-  @Output() public sampleUpdated = new EventEmitter();
+  public sample: SampleInterface | null = null;
+  public sampleGroupId: number | undefined;
+  public sampleCreated = new EventEmitter();
+  public sampleUpdated = new EventEmitter();
 
   public sampleDetailsModalOpen: boolean = false;
   public imageUploadModalOpen: boolean = false;
@@ -54,36 +54,36 @@ export class SampleComponent implements OnInit {
   }
 
   public saveSample(): void {
-    if (this.sampleGroupId && this.sampleGroupId > 0) {
-      if (this.sample?.id) {
-        this.sampleService.updateSample(
-          this.sample.id,
-          this.sampleFormGroup.controls['name'].value,
-          this.sampleFormGroup.controls['date_time'].value,
-          this.sample.sample_group_id,
-        ).subscribe({
-          next: (data: SampleInterface) => {
-            this.sample = data;
-            this.sampleUpdated.emit(this.sample);
-            this.sampleDetailsModalOpen = false;
-          },
-          error: (error: any) => console.error(error)
-        });
-      } else {
-        this.sampleService.createSample(
-          this.sampleFormGroup.controls['name'].value,
-          this.sampleFormGroup.controls['date_time'].value,
-          this.sampleGroupId,
-        ).subscribe({
-          next: (data: SampleInterface) => {
-            this.sample = data;
-            this.sampleCreated.emit(this.sample);
-            this.sampleDetailsModalOpen = false;
-          },
-          error: (error: any) => console.error(error)
-        });
-      }
-    }
+    // if (this.sampleGroupId && this.sampleGroupId > 0) {
+    //   if (this.sample?.id) {
+    //     this.sampleService.updateSample(
+    //       this.sample.id,
+    //       this.sampleFormGroup.controls['name'].value,
+    //       this.sampleFormGroup.controls['date_time'].value,
+    //       this.sample.sample_group_id,
+    //     ).subscribe({
+    //       next: (data: SampleInterface) => {
+    //         this.sample = data;
+    //         this.sampleUpdated.emit(this.sample);
+    //         this.sampleDetailsModalOpen = false;
+    //       },
+    //       error: (error: any) => console.error(error)
+    //     });
+    //   } else {
+    //     this.sampleService.createSample(
+    //       this.sampleFormGroup.controls['name'].value,
+    //       this.sampleFormGroup.controls['date_time'].value,
+    //       this.sampleGroupId,
+    //     ).subscribe({
+    //       next: (data: SampleInterface) => {
+    //         this.sample = data;
+    //         this.sampleCreated.emit(this.sample);
+    //         this.sampleDetailsModalOpen = false;
+    //       },
+    //       error: (error: any) => console.error(error)
+    //     });
+    //   }
+    // }
   }
 
   public imageUploaded(): void {

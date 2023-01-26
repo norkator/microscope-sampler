@@ -12,7 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CategoryMenuComponent} from "./category-menu/category-menu.component";
 import {SampleGroupsComponent} from './sample-groups/sample-groups.component';
-import {SampleComponent} from './samples/sample/sample.component';
+import {SampleComponent} from './sample/sample.component';
 import {SamplesComponent} from './samples/samples.component';
 
 @NgModule({

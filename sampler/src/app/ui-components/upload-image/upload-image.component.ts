@@ -57,7 +57,7 @@ export class UploadImageComponent implements OnInit {
       this.captureCanvas.height = this.videoCaptureHeight;
       // @ts-ignore
       ctx.drawImage(this.video, 0, 0, this.videoCaptureWidth, this.videoCaptureHeight);
-      this.captureCanvas.toBlob((blob: Blob | null) => {
+      this.getBlob().then((blob: Blob | null) => {
         if (blob !== null) {
           const file = new File([blob], String(Date.now()) + '.jpeg');
           const dT = new DataTransfer();
@@ -74,10 +74,24 @@ export class UploadImageComponent implements OnInit {
             });
           }
         }
-      });
+      }).catch((error: any) => {
+        console.error(error);
+      })
     } else {
       console.error('video, captureCanvas or fileInput is null');
     }
+  }
+
+  private getBlob():Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+      if (this.captureCanvas !== null) {
+        this.captureCanvas.toBlob((blob: Blob | null) => {
+          resolve(blob);
+        });
+      } else {
+        reject();
+      }
+    });
   }
 
   private handleSuccess(stream: any) {
